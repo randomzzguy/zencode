@@ -1,440 +1,934 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zencode • Merged Experience</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zencode • Build Smarter. Grow Faster.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="manifest" href="assets/site.webmanifest">
     <style>
-      :root {
-        --bg: #4b4244;
-        --text: #fffdf5;
-        --neutral: #ebe1d8;
-        --primary: #e45258;
-        --primary-dark: #c74449;
-        --secondary: #e2b6a1;
-      }
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
-      body {
-        margin: 0;
-        font-family: Outfit, Space Grotesk, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-      }
-      a { color: inherit; text-decoration: none; }
-      .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-      .text-center { text-align: center; }
-      .section { padding: 80px 0; }
-      .grid-2 { display: grid; grid-template-columns: 1fr; gap: 24px; }
-      .grid-3 { display: grid; grid-template-columns: 1fr; gap: 24px; }
-      @media (min-width: 900px) { .grid-2 { grid-template-columns: 1fr 1fr; } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        :root {
+            /* Core Palette */
+            --bg-dark: #4b4244;
+            --bg-darker: #2d2627;
+            --text-main: #fffdf5;
+            --text-muted: #ebe1d8;
+            --accent-primary: #e45258;
+            --accent-secondary: #e2b6a1;
 
-      .navbar {
-        position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-        backdrop-filter: blur(12px);
-        background: rgba(235, 225, 216, 0.06);
-        border-bottom: 1px solid rgba(235, 225, 216, 0.18);
-      }
-      .nav-container { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; }
-      .logo { display: flex; align-items: center; gap: 12px; }
-      .logo-icon {
-        width: 100px; height: 100px; border-radius: 12px;
-        display: grid; place-items: center; font-weight: 800;
-        color: var(--text);
-      }
-      .logo-text { display: flex; flex-direction: column; line-height: 1; }
-      .brand-name { font-weight: 700; }
-      .brand-tagline { font-size: 12px; color: var(--neutral); opacity: 0.8; }
+            /* Derived UI Colors */
+            --surface-glass: rgba(235, 225, 216, 0.03);
+            --surface-border: rgba(235, 225, 216, 0.1);
+            --glow-primary: rgba(228, 82, 88, 0.6);
+            --glow-secondary: rgba(226, 182, 161, 0.6);
 
-      .desktop-nav { display: none; gap: 20px; align-items: center; }
-      .nav-link { color: var(--neutral); font-weight: 500; }
-      .nav-link:hover { color: var(--text); }
-      .btn { display: inline-block; border-radius: 9999px; font-weight: 600; cursor: pointer; transition: transform .2s ease, box-shadow .3s ease, background .3s ease; }
-      .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--text); padding: 12px 20px; box-shadow: 0 8px 32px rgba(228, 82, 88, 0.35); }
-      .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 48px rgba(228, 82, 88, 0.5); }
-      .btn-outline { border: 2px solid var(--neutral); color: var(--neutral); padding: 12px 20px; }
-      .btn-outline:hover { border-color: var(--primary); color: var(--primary); box-shadow: 0 0 28px rgba(228, 82, 88, 0.35); }
-      .mobile-menu-btn { width: 40px; height: 40px; border: 1px solid rgba(235,225,216,0.25); border-radius: 10px; background: transparent; display: grid; place-items: center; gap: 5px; padding: 8px; }
-      .mobile-menu-btn span { display: block; width: 18px; height: 2px; background: var(--neutral); }
-      .mobile-menu { position: fixed; top: 64px; left: 0; right: 0; background: rgba(235,225,216,0.06); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(235,225,216,0.18); display: none; }
-      .mobile-menu nav { display: grid; gap: 12px; padding: 16px 24px; }
-      @media (min-width: 900px) { .desktop-nav { display: flex; } .mobile-menu-btn { display: none; } .mobile-menu { display: none !important; } }
+            /* Fonts */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
 
-      .tech-grid { position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(235,225,216,0.05) 1px, transparent 1px), linear-gradient(0deg, rgba(235,225,216,0.05) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
-      .scanline { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.08; animation: scan 8s linear infinite; }
-      @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
-      .data-stream { position: absolute; width: 2px; height: 100px; background: linear-gradient(to bottom, transparent, var(--primary), transparent); opacity: 0; animation: stream 3s linear infinite; }
-      @keyframes stream { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(100vh); opacity: 0; } }
+            /* Shapes */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
 
-      .hero { position: relative; overflow: hidden; padding: 140px 0 80px; }
-      .hero-container { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; }
-      @media (min-width: 900px) { .hero-container { grid-template-columns: 1.15fr 0.85fr; } }
-      .hero-title { font-size: clamp(32px, 6vw, 56px); font-weight: 800; line-height: 1.1; }
-      .text-accent { color: var(--secondary); }
-      .text-primary { color: var(--primary); }
-      .hero-subtitle { color: var(--neutral); font-size: 18px; margin-top: 16px; max-width: 640px; }
-      .hero-actions { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-      .glass-card { background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.14) 100%); border: 1px solid rgba(235,225,216,0.18); backdrop-filter: blur(16px); border-radius: 20px; box-shadow: 0 24px 64px rgba(228,82,88,0.15); }
-      .visual-card { padding: 24px; }
-      .label { font-size: 12px; color: var(--neutral); }
-      .badge { font-size: 12px; color: var(--neutral); opacity: 0.8; }
-      .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-      .feature-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: var(--neutral); }
-      .bullet.primary { color: var(--primary); }
-      .bullet.accent { color: var(--secondary); }
-      .card-actions { display: flex; gap: 10px; margin-top: 16px; }
-      .btn-primary-sm { background: var(--primary); color: var(--text); border: none; padding: 10px 14px; border-radius: 12px; box-shadow: 0 8px 28px rgba(228,82,88,0.35); }
-      .btn-outline-sm { border: 1px solid rgba(235,225,216,0.25); color: var(--neutral); padding: 10px 14px; border-radius: 12px; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-      .section-title { font-size: clamp(28px, 5vw, 40px); font-weight: 800; }
-      .card { padding: 22px; border-radius: 16px; background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.14) 100%); border: 1px solid rgba(235,225,216,0.18); box-shadow: 0 12px 40px rgba(228,82,88,0.12); }
-      .card-label { font-size: 12px; color: var(--neutral); }
-      .solution-card { position: relative; overflow: hidden; }
-      .solution-card::before { content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, var(--primary), var(--secondary)); transition: left .6s ease; }
-      .solution-card:hover::before { left: 100%; }
-      .glassmorphic { background: linear-gradient(135deg, rgba(235,225,216,0.05) 0%, rgba(235,225,216,0.1) 100%); border: 1px solid rgba(235,225,216,0.15); backdrop-filter: blur(20px); transition: all .4s ease; position: relative; overflow: hidden; }
-      .glassmorphic::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 30%, rgba(228,82,88,0.06) 50%, transparent 70%); transform: rotate(45deg); transition: all .6s ease; }
-      .glassmorphic:hover::after { transform: rotate(45deg) translate(50%, 50%); }
-      .glassmorphic:hover { background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.15) 100%); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(228,82,88,0.2), 0 0 40px rgba(228,82,88,0.1); border-color: rgba(228,82,88,0.3); }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
 
-      .bg-darker { background: linear-gradient(180deg, rgba(199,68,73,0.08) 0%, rgba(235,225,216,0.04) 100%); }
-      .stat-card { position: relative; overflow: hidden; padding: 24px; border-radius: 16px; background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.14) 100%); border: 1px solid rgba(235,225,216,0.18); }
-      .stat-number { font-size: 40px; font-weight: 800; }
-      .text-accent { color: var(--secondary); }
-      .radial-glow { background: radial-gradient(circle at center, rgba(228,82,88,0.2), transparent 60%); filter: blur(60px); }
-      .particle { position: absolute; width: 4px; height: 4px; background: var(--primary); border-radius: 50%; pointer-events: none; opacity: 0.6; }
-      @keyframes borderFlow { 0% { stroke-dashoffset: 1000; } 100% { stroke-dashoffset: 0; } }
+        /* --- Tech Background Grid & Effects --- */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(228, 82, 88, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(228, 82, 88, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            animation: grid-move 20s linear infinite;
+        }
 
-      .pricing-card { padding: 24px; border-radius: 16px; background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.14) 100%); border: 1px solid rgba(235,225,216,0.18); text-align: center; box-shadow: 0 12px 40px rgba(228,82,88,0.12); }
-      .featured { box-shadow: 0 24px 72px rgba(228,82,88,0.25); border-color: rgba(228,82,88,0.35); }
-      .package-name { font-size: 12px; color: var(--neutral); }
-      .price { font-size: 32px; font-weight: 800; margin: 10px 0 16px; color: var(--text); }
-      .pricing-features { list-style: none; padding: 0; margin: 0 0 16px; color: var(--neutral); display: grid; gap: 8px; }
-      .full-width { width: 100%; }
+        @keyframes grid-move {
+            0% {
+                transform: translateY(0);
+            }
 
-      .testimonial-card { padding: 16px 18px; border-left: 4px solid var(--primary); border-radius: 14px; background: linear-gradient(135deg, rgba(235,225,216,0.08) 0%, rgba(235,225,216,0.14) 100%); }
-      .border-primary { border-left-color: var(--primary); }
-      .border-accent { border-left-color: var(--secondary); }
+            100% {
+                transform: translateY(40px);
+            }
+        }
 
-      .contact-form-wrapper { padding: 24px; }
-      .contact-form { display: grid; gap: 12px; }
-      .form-group input, .form-group textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(235,225,216,0.25); background: rgba(235,225,216,0.07); color: var(--text); }
-      .form-group input::placeholder, .form-group textarea::placeholder { color: var(--neutral); }
+        #rain-container {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
 
-      footer { padding: 40px 0; color: var(--neutral); }
+        .data-stream {
+            position: absolute;
+            top: -200px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary), transparent);
+            opacity: 0;
+            animation: stream-fall linear infinite;
+        }
 
-      .fade-in-up { opacity: 0; transform: translateY(24px); animation: fadeUp .8s ease forwards; }
-      .fade-in-right { opacity: 0; transform: translateX(-24px); animation: fadeRight .8s ease forwards; }
-      .fade-in-left { opacity: 0; transform: translateX(24px); animation: fadeLeft .8s ease forwards; }
-      .delay-100 { animation-delay: .1s; } .delay-200 { animation-delay: .2s; }
-      @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-      @keyframes fadeRight { to { opacity: 1; transform: translateX(0); } }
-      @keyframes fadeLeft { to { opacity: 1; transform: translateX(0); } }
+        @keyframes stream-fall {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            85% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(150vh);
+                opacity: 0;
+            }
+        }
+
+        /* --- Animations --- */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(228, 82, 88, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(228, 82, 88, 0.6);
+            }
+        }
+
+        @keyframes glitch-load {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent {
+            color: var(--accent-secondary);
+            text-shadow: 0 0 10px rgba(226, 182, 161, 0.4);
+        }
+
+        .text-primary {
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px rgba(228, 82, 88, 0.4);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            z-index: 100;
+            padding: 0.75rem 2rem;
+            background: rgba(45, 38, 39, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(228, 82, 88, 0.3);
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .logo object {
+            height: 55px;
+            width: auto;
+            filter: drop-shadow(0 0 5px var(--accent-primary));
+            pointer-events: none;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media(min-width: 768px) {
+            .nav-links {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: white;
+            text-shadow: 0 0 8px white;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.4);
+            border: none;
+            animation: pulse-glow 3s infinite;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            border-radius: var(--radius-lg);
+        }
+
+        .btn-hollow {
+            background: transparent;
+            border: 1px solid var(--accent-border, rgba(255, 255, 255, 0.2));
+            color: var(--text-muted);
+        }
+
+        .btn-hollow:hover {
+            border-color: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 200px;
+            padding-bottom: 120px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(228, 82, 88, 0.08) 0%, transparent 60%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulse-glow 5s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: glitch-load 0.8s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        /* --- Spotlight Cards (Solutions) --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: rgba(45, 38, 39, 0.6);
+            border: 1px solid rgba(228, 82, 88, 0.2);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Neon hover effect */
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.2), inset 0 0 20px rgba(228, 82, 88, 0.05);
+            z-index: 10;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(228, 82, 88, 0.15),
+                    transparent 40%);
+            z-index: 1;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(228, 82, 88, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(228, 82, 88, 0.4);
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            box-shadow: 0 0 10px rgba(228, 82, 88, 0.1);
+            transition: all 0.3s;
+        }
+
+        .icon-box img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(228, 82, 88, 0.4));
+        }
+
+        .card:hover .icon-box {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-primary);
+            transform: scale(1.1);
+            border-radius: var(--radius-md);
+        }
+
+        .card:hover .icon-box img {
+            filter: brightness(0) invert(1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- Pricing Section (Tech Tables) --- */
+        .pricing-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-col {
+            background: rgba(30, 25, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-col:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .pricing-col.featured {
+            border: 2px solid var(--accent-primary);
+            box-shadow: 0 0 40px rgba(228, 82, 88, 0.2);
+            background: radial-gradient(circle at top right, rgba(228, 82, 88, 0.15), rgba(30, 25, 26, 0.9));
+        }
+
+        .pricing-col.featured::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50px;
+        }
+
+        .price-tag {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-primary);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: #252021;
+        }
+
+        /* --- Mobile Toggle --- */
+        .mobile-toggle {
+            display: block;
+            background: none;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        @media(min-width: 768px) {
+            .mobile-toggle {
+                display: none;
+            }
+        }
+
+        /* --- Custom Contact Form --- */
+        .contact-section {
+            padding: 6rem 0;
+        }
+
+        .glass-form {
+            background: rgba(30, 25, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--surface-border);
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            color: white;
+            font-family: inherit;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.3);
+            background: rgba(228, 82, 88, 0.05);
+        }
     </style>
-  </head>
-  <body>
-    <div class="tech-grid"></div>
-    <div class="scanline"></div>
-    <div class="data-stream" style="left:10%; animation-delay:0s;"></div>
-    <div class="data-stream" style="left:35%; animation-delay:1.1s;"></div>
-    <div class="data-stream" style="left:62%; animation-delay:2.2s;"></div>
+</head>
 
-    <header class="navbar">
-      <div class="container nav-container">
-        <a href="#" class="logo">
-          <div class="logo-text">
-            <object data="assets/fullLogoV2.svg" type="image/svg+xml" aria-label="Zencode Software Labs logo" style="height:60px; display:block;">
-              Zencode Software Labs
-            </object>
-          </div>
+<body id="top">
+
+    <div class="bg-grid"></div>
+    <div id="rain-container"></div>
+
+    <nav class="navbar">
+        <a href="#top" class="logo">
+            <object data="assets/fullLogoV2.svg" type="image/svg+xml"></object>
         </a>
-
-        <nav class="desktop-nav">
-          <a href="#solutions" class="nav-link">Solutions</a>
-          <a href="#results" class="nav-link">Results</a>
-          <a href="#pricing" class="nav-link">Pricing</a>
-          <a href="#contact" class="btn btn-primary">Book Free Call</a>
-        </nav>
-
-        <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </header>
-
-    <div class="mobile-menu" id="mobileMenu">
-      <nav>
-        <a href="#solutions" class="nav-link">Solutions</a>
-        <a href="#results" class="nav-link">Results</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
-        <a href="#contact" class="btn btn-primary full-width">Book Free Call</a>
-      </nav>
-    </div>
+        <div class="nav-links">
+            <a href="#solutions" class="nav-link">Solutions</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#results" class="nav-link">Results</a>
+            <a href="#contact" class="btn btn-primary">Book Free Call</a>
+        </div>
+        <button class="mobile-toggle" aria-label="Menu" onclick="alert('Menu functionality wrapper')">☰</button>
+    </nav>
 
     <main>
-      <section class="hero">
-        <div class="container hero-container">
-          <div class="fade-in-up">
-            <h1 class="hero-title">Digital tools that <span class="text-accent">save you time</span> and <span class="text-primary">grow revenue</span></h1>
-            <p class="hero-subtitle">We build websites, automations, and simple AI tools for small businesses — think fewer manual tasks, more returning customers, and clear results. No long contracts, no jargon.</p>
-            <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">🚀 Book Free Assessment</a>
-              <a href="#solutions" class="btn btn-outline">View Solutions</a>
-            </div>
-            <div style="display:grid; grid-template-columns:1fr; gap:14px; margin-top:24px; max-width:560px;">
-              <div style="display:flex; align-items:flex-start; gap:12px;">
-                <div style="width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background: var(--primary); box-shadow:0 0 24px rgba(228,82,88,0.45); font-weight:800; color: var(--text);">✓</div>
-                <div>
-                  <div style="font-weight:600;">Stop manual work</div>
-                  <div style="font-size:13px; color: var(--neutral);">Automate repetitive tasks like follow-ups & invoices.</div>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="container">
+                <div
+                    style="font-family: 'Space Mono', monospace; color: var(--accent-primary); margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 0.2em;">
+                    /// SYSTEM_STATUS: ONLINE</div>
+                <h1>Digital Tools That <br><span class="text-accent" style="font-style:italic;">Save Time</span> & <span
+                        class="text-primary" style="font-style:italic;">Grow Revenue</span></h1>
+                <p>We build websites, automations, and AI tools for small businesses. <br>Fewer tasks. More customers.
+                    Clear results.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Init_Launch_Sequence 🚀</a>
+                    <a href="#solutions" class="btn btn-hollow">Explore_Modules</a>
                 </div>
-              </div>
-              <div style="display:flex; align-items:flex-start; gap:12px;">
-                <div style="width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background: var(--secondary); box-shadow:0 0 24px rgba(226,182,161,0.45); font-weight:800; color: var(--bg);">$</div>
-                <div>
-                  <div style="font-weight:600;">Increase revenue</div>
-                  <div style="font-size:13px; color: var(--neutral);">Improve conversions with fast-loading sites & clear CTAs.</div>
+
+                <div style="margin-top: 5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div
+                        style="background: rgba(0,0,0,0.3); padding: 1.5rem 2rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem; color: var(--accent-secondary);">⚡</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; text-transform: uppercase;">Stop Manual Work</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">> Automate_Tasks.exe</div>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(0,0,0,0.3); padding: 1.5rem 2rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem; color: var(--accent-primary);">📈</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; text-transform: uppercase;">Increase Revenue</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">> Optimize_Flows.exe</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+        </section>
 
-          <div class="fade-in-up delay-200">
-            <div class="glass-card visual-card">
-              <div class="card-header">
-                <div>
-                  <span class="label">Quick Solutions</span>
-                  <h2 style="margin:6px 0 0;">Fast projects for small teams</h2>
+        <!-- SOLUTIONS -->
+        <section id="solutions" class="container">
+            <div class="section-header">
+                <h2>System Modules</h2>
+                <p class="text-accent">Ready to Deploy</p>
+            </div>
+
+            <div class="spotlight-grid" id="card-container">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/internet.svg" alt="Website"></div>
+                        <h3>Custom Websites</h3>
+                        <p>High-performant, responsive interfaces designed to convert traffic into qualified leads.</p>
+                    </div>
                 </div>
-                <span class="badge">Avg. delivery 1-3 weeks</span>
-              </div>
-              <ul class="feature-list">
-                <li><span class="bullet primary">•</span> Website (Landing+Contact)</li>
-                <li><span class="bullet accent">•</span> Booking / Quote Automations</li>
-                <li><span class="bullet primary">•</span> Simple CRM & Reminders</li>
-                <li><span class="bullet accent">•</span> Chat + Lead Capture</li>
-              </ul>
-              <div class="card-actions">
-                <a href="#contact" class="btn-primary-sm">Start a Project</a>
-                <a href="#results" class="btn-outline-sm">See Examples</a>
-              </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/crm.svg" alt="CRM"></div>
+                        <h3>CRM Database</h3>
+                        <p>Centralized customer tracking with automated reminders and analytics dashboards.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/automation.svg" alt="Automation"></div>
+                        <h3>Automations</h3>
+                        <p>Invoice generation, booking logic, and auto-responses running on autopilot.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/chatbot.svg" alt="AI Agent"></div>
+                        <h3>AI Agents</h3>
+                        <p>24/7 intelligent support bots to capture leads and answer queries instantly.</p>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/ecom.svg" alt="E-Commerce"></div>
+                        <h3>E-Commerce</h3>
+                        <p>Full-stack online store solutions with secure payment gateways and inventory sync.</p>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/marketing.svg" alt="Branding"></div>
+                        <h3>Brand Identity</h3>
+                        <p>Cohesive visual design systems to establish market authority and recognition.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="solutions" class="section">
-        <div class="container">
-          <h2 class="section-title text-center">Solutions for Small Businesses</h2>
-          <div class="grid-3">
-            <div class="card solution-card fade-in-up">
-              <span class="card-label">Solution</span>
-              <h3>Websites that convert</h3>
-              <p style="color:var(--neutral);">Fast, responsive sites with easy booking & contact flows.</p>
+        <!-- STATS -->
+        <section id="results" style="padding: 6rem 0; margin-top: 6rem; position: relative;">
+            <div style="position: absolute; inset: 0; background: var(--bg-darker); z-index: -1;"></div>
+            <div class="container text-center">
+                <h2>Performance Metrics</h2>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-top: 4rem;">
+                    <div>
+                        <div
+                            style="font-size: 4rem; font-weight: 800; color: var(--accent-secondary); text-shadow: 0 0 20px var(--accent-secondary);">
+                            +42%</div>
+                        <p style="color: white; font-family: monospace;">> BOOKING_RATE</p>
+                    </div>
+                    <div>
+                        <div
+                            style="font-size: 4rem; font-weight: 800; color: var(--accent-primary); text-shadow: 0 0 20px var(--accent-primary);">
+                            7h</div>
+                        <p style="color: white; font-family: monospace;">> HOURS_SAVED_WEEKLY</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 4rem; font-weight: 800; color: white; text-shadow: 0 0 20px white;">2x
+                        </div>
+                        <p style="color: white; font-family: monospace;">> ENGAGEMENT_VELOCITY</p>
+                    </div>
+                </div>
             </div>
-            <div class="card solution-card fade-in-up delay-100">
-              <span class="card-label">Solution</span>
-              <h3>Automations & Workflows</h3>
-              <p style="color:var(--neutral);">Save staff hours: invoices, reminders, messages automated.</p>
-            </div>
-            <div class="card solution-card fade-in-up delay-200">
-              <span class="card-label">Solution</span>
-              <h3>AI assistance</h3>
-              <p style="color:var(--neutral);">Chat & document helpers to answer customers and summarize leads.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section" style="background: var(--bg);">
-        <div class="container">
-          <h2 class="section-title text-center">What We Can Build For You</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px;"><img src="assets/internet.svg" alt="Custom Websites" style="width:32px; height:32px; display:block;" /></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">Custom Websites</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Fast, modern, mobile-ready</p>
-            </div>
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px; position: relative;"><img src="assets/crm.svg" alt="CRM Tools" style="width:32px; height:32px; display:block;" /><div style="position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--primary); border-radius: 50%;"></div></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">CRM Tools</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Track customers, reminders, analytics</p>
-            </div>
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px;"><img src="assets/automation.svg" alt="Automations" style="width:32px; height:32px; display:block;" /></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">Automations</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Invoices, bookings, responses, workflows</p>
-            </div>
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px; position: relative;"><img src="assets/chatbot.svg" alt="Chatbots and AI Assistance" style="width:32px; height:32px; display:block;" /><div style="position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--primary); border-radius: 50%;"></div></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">Chatbots + AI Assistance</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Smart customer support</p>
-            </div>
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px;"><img src="assets/ecom.svg" alt="E-commerce Setup" style="width:32px; height:32px; display:block;" /></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">E-commerce Setup</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Complete online store solutions</p>
-            </div>
-            <div class="solution-card glassmorphic" style="padding: 24px; border-radius: 20px;">
-              <div style="margin-bottom: 12px; position: relative;"><img src="assets/marketing.svg" alt="Brand and Marketing Tools" style="width:32px; height:32px; display:block;" /><div style="position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--primary); border-radius: 50%;"></div></div>
-              <h3 style="font-size: 1.25rem; font-weight: 600; margin: 0 0 8px 0; color: var(--text);">Brand & Marketing Tools</h3>
-              <p style="margin: 0; color: var(--neutral); font-size: 0.95rem;">Design and promotion resources</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="results" class="section bg-darker">
-        <div class="container">
-          <h2 class="section-title text-center">Quick Wins — Real Numbers</h2>
-          <div class="grid-3 text-center">
-            <div class="stat-card fade-in-up">
-              <div class="stat-number text-accent">+42%</div>
-              <p style="color:var(--neutral);">Bookings for a local service client</p>
-            </div>
-            <div class="stat-card fade-in-up delay-100">
-              <div class="stat-number" style="color:var(--primary);">7h</div>
-              <p style="color:var(--neutral);">Saved per week via automation</p>
-            </div>
-            <div class="stat-card fade-in-up delay-200">
-              <div class="stat-number text-accent">2×</div>
-              <p style="color:var(--neutral);">Increase in customer engagement</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" class="section">
-        <div class="container">
-          <h2 class="section-title text-center">Simple Packages for Small Teams</h2>
-          <div class="grid-3">
-            <div class="pricing-card fade-in-up">
-              <span class="package-name">Starter</span>
-              <div class="price">Contact For Quote</div>
-              <ul class="pricing-features">
-                <li>Landing page + contact</li>
-                <li>1 week delivery</li>
-                <li>Basic SEO</li>
-              </ul>
-              <a href="#contact" class="btn btn-primary full-width">Choose</a>
+        <!-- PRICING -->
+        <section id="pricing" class="pricing-section container">
+            <div class="section-header">
+                <h2>Deployment Packages</h2>
+                <p>Transparent Protocols</p>
             </div>
 
-            <div class="pricing-card featured fade-in-up delay-100">
-              <span class="package-name">Growth</span>
-              <div class="price">Contact For Quote</div>
-              <ul class="pricing-features">
-                <li>Custom website</li>
-                <li>Booking & CRM</li>
-                <li>2–3 week delivery</li>
-              </ul>
-              <a href="#contact" class="btn btn-primary full-width">Choose</a>
-            </div>
+            <div class="pricing-grid">
+                <div class="pricing-col">
+                    <h3>Starter Protocol</h3>
+                    <div class="price-tag">RM1200</div>
+                    <ul class="feature-list">
+                        <li>Landing Page + Contact</li>
+                        <li>1 Week Delivery</li>
+                        <li>Basic SEO Setup</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-hollow"
+                        style="width: 100%; display: block; text-align: center;">Execute Starter</a>
+                </div>
 
-            <div class="pricing-card fade-in-up delay-200">
-              <span class="package-name">Automation</span>
-              <div class="price">Contact For Quote</div>
-              <ul class="pricing-features">
-                <li>Invoice & reminder flows</li>
-                <li>Chat capture</li>
-                <li>Integration</li>
-              </ul>
-              <a href="#contact" class="btn btn-primary full-width">Choose</a>
-            </div>
-          </div>
-        </div>
-      </section>
+                <div class="pricing-col featured">
+                    <h3>Growth Protocol</h3>
+                    <div class="price-tag">Quote Only</div>
+                    <ul class="feature-list">
+                        <li>Custom Website (Multi-page)</li>
+                        <li>Booking System & CRM</li>
+                        <li>2-3 Week Delivery</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary"
+                        style="width: 100%; display: block; text-align: center;">Execute Growth</a>
+                </div>
 
-      <section style="width: 100%; padding: 5rem 2rem; background: var(--bg); position: relative; overflow: hidden;">
-        <div class="tech-grid"></div>
-        <div class="radial-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1200px; height: 800px;"></div>
-        <div id="particles-container" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none;"></div>
-        <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 2; background: linear-gradient(135deg, rgba(75,66,68,0.9), rgba(75,66,68,0.7)); padding: 4rem 3rem; border-radius: 32px; border: 2px solid rgba(228,82,88,0.2); box-shadow: 0 20px 80px rgba(228,82,88,0.2), inset 0 0 60px rgba(228,82,88,0.03); backdrop-filter: blur(20px);">
-          <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.15;"><rect x="0" y="0" width="100%" height="100%" fill="none" stroke="var(--primary)" stroke-width="2" rx="32" stroke-dasharray="1500" stroke-dashoffset="1500" style="animation: borderFlow 3s ease-in-out forwards;"/></svg>
-          <h2 style="font-size: 2.5rem; font-weight: 700; margin: 0 0 2.5rem 0; color: var(--text); position: relative; z-index: 2;">Let's Build Something That Moves Your Business Forward</h2>
-          <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 2;">
-            <a href="#contact" class="btn btn-primary">Get Started Today</a>
-            <a href="#contact" class="btn btn-outline">Schedule a Call</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="grid-2 gap-large">
-            <div class="testimonials">
-              <h2 class="section-title" style="text-align:left;">Trusted by small businesses</h2>
-              <blockquote class="testimonial-card border-primary fade-in-right">
-                <p>“We doubled bookings in one month — and the owner spends less time on admin.”</p>
-                <cite style="color:var(--neutral);">— Local Cleaning Service</cite>
-              </blockquote>
-              <blockquote class="testimonial-card border-accent fade-in-right delay-100">
-                <p>“Professional, fast, and did exactly what they promised.”</p>
-                <cite style="color:var(--neutral);">— Cafe Owner</cite>
-              </blockquote>
+                <div class="pricing-col">
+                    <h3>Automation Protocol</h3>
+                    <div class="price-tag">Quote Only</div>
+                    <ul class="feature-list">
+                        <li>Invoice & Reminder Flows</li>
+                        <li>Chat Lead Capture</li>
+                        <li>Custom Integrations</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-hollow"
+                        style="width: 100%; display: block; text-align: center;">Execute Auto</a>
+                </div>
             </div>
+        </section>
 
-            <div id="contact" class="contact-form-wrapper glass-card fade-in-left">
-              <span class="label">Start with a free consultation</span>
-              <h3 style="margin:8px 0 16px;">Book your free call</h3>
-              <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');">
-                <div class="form-group"><input type="text" placeholder="Business name" required></div>
-                <div class="form-group"><input type="text" placeholder="Your name" required></div>
-                <div class="form-group"><input type="tel" placeholder="Phone or WhatsApp" required></div>
-                <div class="form-group"><textarea placeholder="Briefly describe your need" rows="4"></textarea></div>
-                <button type="submit" class="btn btn-primary full-width">Request Call</button>
-              </form>
+        <!-- CONTACT -->
+        <section id="contact" class="container contact-section">
+            <div class="glass-form">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Initiate Partnership</h2>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Transmission Received!');">
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            ENTITY_NAME</label>
+                        <input type="text" class="form-input" required placeholder="Business Name">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            OPERATOR_NAME</label>
+                        <input type="text" class="form-input" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            COMMS_LINK</label>
+                        <input type="tel" class="form-input" required placeholder="Phone / WhatsApp">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            MISSION_BRIEF</label>
+                        <textarea class="form-input" rows="4" placeholder="Describe requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT DATA</button>
+                </form>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
     </main>
 
     <footer>
-      <div class="container text-center">
-        <p>© <span id="year"></span> Zencode Software Labs • Registered SSM</p>
-      </div>
+        <div class="container">
+            <div style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="mailto:info@zencode.my" class="nav-link" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/1FeuCvavxQ/?mibextid=wwXIfr" target="_blank" class="nav-link"
+                    aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/zencode.my" target="_blank" class="nav-link" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://tiktok.com/@zencode.my" target="_blank" class="nav-link" aria-label="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M9 0h1.98c.144.715.54 1.617 1.093 2.512C12.43 3.013 13.09 3.546 14 3.97v3.08c-.705.109-1.354.408-1.928.847-.394.301-.734.681-1 .11V6.997c0-.232-.014-.49-.033-.768a4.981 4.981 0 0 0-.967.625A5.05 5.05 0 0 0 9 8.017V0z" />
+                        <path d="M9 13v-3.08c1.376-1.554 4.094-1.127 5-.29V13h-5z" />
+                        <!-- Simplified path for brevity, standard one preferred -->
+                        <!-- Using a cleaner path for Tiktok -->
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; <span id="year">2025</span> ZENCODE SOFTWARE LABS. ALL RIGHTS RESERVED.</p>
+        </div>
     </footer>
 
     <script>
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
-      const btn = document.getElementById('menuBtn');
-      const menu = document.getElementById('mobileMenu');
-      if (btn && menu) {
-        btn.addEventListener('click', () => {
-          const open = menu.style.display === 'block';
-          menu.style.display = open ? 'none' : 'block';
-        });
-        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.style.display = 'none'; }));
-      }
-      function createParticles(){
-        const container = document.getElementById('particles-container');
-        if(!container) return;
-        for(let i=0;i<15;i++){
-          const particle = document.createElement('div');
-          particle.className = 'particle';
-          particle.style.left = Math.random()*100 + '%';
-          particle.style.top = Math.random()*100 + '%';
-          particle.style.animationDelay = Math.random()*3 + 's';
-          particle.style.animationDuration = (Math.random()*3 + 2) + 's';
-          const key = `float-particle-${i}`;
-          const style = document.createElement('style');
-          style.textContent = `@keyframes ${key}{0%{transform:translate(0,0) scale(1);opacity:0;}20%{opacity:.8;}80%{opacity:.8;}100%{transform:translate(${(Math.random()-0.5)*100}px, ${-100 - Math.random()*100}px) scale(.5);opacity:0;}}`;
-          document.head.appendChild(style);
-          particle.style.animation = `${key} ${(Math.random()*3 + 2)}s ease-in-out infinite`;
-          container.appendChild(particle);
+        // --- Spotlight Effect ---
+        const cards = document.querySelectorAll('.card');
+        const cardContainer = document.getElementById('card-container');
+
+        if (cardContainer) {
+            cardContainer.addEventListener('mousemove', (e) => {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    // Just simple spotlight calc
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
         }
-      }
-      createParticles();
+
+        // --- Raining Lasers Logic ---
+        function createRain() {
+            const container = document.getElementById('rain-container');
+            const streamCount = 12; // Reduced for Zen feel
+
+            for (let i = 0; i < streamCount; i++) {
+                const stream = document.createElement('div');
+                stream.className = 'data-stream';
+                stream.style.left = Math.random() * 95 + '%';
+                stream.style.height = (Math.random() * 100 + 100) + 'px';
+                // Much slower animation: 5s to 12s
+                stream.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                stream.style.animationDelay = (Math.random() * 5) + 's';
+
+                // Varied opacity for depth, slightly subtler
+                stream.style.opacity = Math.random() * 0.4 + 0.1;
+
+                container.appendChild(stream);
+            }
+
+            // Scroll opacity logic
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                // Fade out faster, e.g., by 50% of the page
+                const opacity = Math.max(0, 1 - (scrollY / (maxScroll * 0.6)));
+                container.style.opacity = opacity;
+            });
+        }
+        createRain();
+
+        // --- Intersection Observer ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(sec => {
+            sec.style.opacity = 0;
+            sec.style.transform = 'translateY(30px)';
+            sec.style.transition = 'all 0.8s ease-out';
+            observer.observe(sec);
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
-    
-  </body>
+</body>
+
 </html>
