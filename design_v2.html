@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zencode • Merged Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+    <style>
+        :root {
+            /* Core Palette */
+            --bg-dark: #4b4244;
+            --bg-darker: #2d2627;
+            --text-main: #fffdf5;
+            --text-muted: #ebe1d8;
+            --accent-primary: #e45258;
+            --accent-secondary: #e2b6a1;
+
+            /* Derived UI Colors */
+            --surface-glass: rgba(235, 225, 216, 0.03);
+            --surface-border: rgba(235, 225, 216, 0.1);
+            --glow-primary: rgba(228, 82, 88, 0.6);
+            --glow-secondary: rgba(226, 182, 161, 0.6);
+
+            /* Fonts */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+
+            /* Shapes */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* --- Tech Background Grid & Effects --- */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(228, 82, 88, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(228, 82, 88, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(40px);
+            }
+        }
+
+        #rain-container {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        .data-stream {
+            position: absolute;
+            top: -200px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary), transparent);
+            opacity: 0;
+            animation: stream-fall linear infinite;
+        }
+
+        @keyframes stream-fall {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            85% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(150vh);
+                opacity: 0;
+            }
+        }
+
+        /* --- Animations --- */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(228, 82, 88, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(228, 82, 88, 0.6);
+            }
+        }
+
+        @keyframes glitch-load {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* --- Utilities --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .text-accent {
+            color: var(--accent-secondary);
+            text-shadow: 0 0 10px rgba(226, 182, 161, 0.4);
+        }
+
+        .text-primary {
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px rgba(228, 82, 88, 0.4);
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            z-index: 100;
+            padding: 0.75rem 2rem;
+            background: rgba(45, 38, 39, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(228, 82, 88, 0.3);
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 5px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .logo:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .logo object {
+            height: 55px;
+            width: auto;
+            filter: drop-shadow(0 0 5px var(--accent-primary));
+            pointer-events: none;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 2rem;
+        }
+
+        @media(min-width: 768px) {
+            .nav-links {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: white;
+            text-shadow: 0 0 8px white;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.4);
+            border: none;
+            animation: pulse-glow 3s infinite;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            border-radius: var(--radius-lg);
+        }
+
+        .btn-hollow {
+            background: transparent;
+            border: 1px solid var(--accent-border, rgba(255, 255, 255, 0.2));
+            color: var(--text-muted);
+        }
+
+        .btn-hollow:hover {
+            border-color: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.3);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding-top: 200px;
+            padding-bottom: 120px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(228, 82, 88, 0.08) 0%, transparent 60%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulse-glow 5s infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            animation: glitch-load 0.8s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        /* --- Spotlight Cards (Solutions) --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: rgba(45, 38, 39, 0.6);
+            border: 1px solid rgba(228, 82, 88, 0.2);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Neon hover effect */
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.2), inset 0 0 20px rgba(228, 82, 88, 0.05);
+            z-index: 10;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(228, 82, 88, 0.15),
+                    transparent 40%);
+            z-index: 1;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(228, 82, 88, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(228, 82, 88, 0.4);
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            box-shadow: 0 0 10px rgba(228, 82, 88, 0.1);
+            transition: all 0.3s;
+        }
+
+        .icon-box img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(228, 82, 88, 0.4));
+        }
+
+        .card:hover .icon-box {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-primary);
+            transform: scale(1.1);
+            border-radius: var(--radius-md);
+        }
+
+        .card:hover .icon-box img {
+            filter: brightness(0) invert(1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- Pricing Section (Tech Tables) --- */
+        .pricing-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-col {
+            background: rgba(30, 25, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-col:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .pricing-col.featured {
+            border: 2px solid var(--accent-primary);
+            box-shadow: 0 0 40px rgba(228, 82, 88, 0.2);
+            background: radial-gradient(circle at top right, rgba(228, 82, 88, 0.15), rgba(30, 25, 26, 0.9));
+        }
+
+        .pricing-col.featured::after {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50px;
+        }
+
+        .price-tag {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        .feature-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-primary);
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid var(--surface-border);
+            padding: 4rem 0 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: #252021;
+        }
+
+        /* --- Mobile Toggle --- */
+        .mobile-toggle {
+            display: block;
+            background: none;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        @media(min-width: 768px) {
+            .mobile-toggle {
+                display: none;
+            }
+        }
+
+        /* --- Custom Contact Form --- */
+        .contact-section {
+            padding: 6rem 0;
+        }
+
+        .glass-form {
+            background: rgba(30, 25, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--surface-border);
+            padding: 3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            color: white;
+            font-family: inherit;
+            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.3);
+            background: rgba(228, 82, 88, 0.05);
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <div class="bg-grid"></div>
+    <div id="rain-container"></div>
+
+    <nav class="navbar">
+        <a href="#top" class="logo">
+            <object data="assets/fullLogoV2.svg" type="image/svg+xml"></object>
+        </a>
+        <div class="nav-links">
+            <a href="#solutions" class="nav-link">Solutions</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#results" class="nav-link">Results</a>
+            <a href="#contact" class="btn btn-primary">Book Free Call</a>
+        </div>
+        <button class="mobile-toggle" aria-label="Menu" onclick="alert('Menu functionality wrapper')">☰</button>
+    </nav>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-glow"></div>
+            <div class="container">
+                <div
+                    style="font-family: 'Space Mono', monospace; color: var(--accent-primary); margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 0.2em;">
+                    /// SYSTEM_STATUS: ONLINE</div>
+                <h1>Digital Tools That <br><span class="text-accent" style="font-style:italic;">Save Time</span> & <span
+                        class="text-primary" style="font-style:italic;">Grow Revenue</span></h1>
+                <p>We build websites, automations, and AI tools for small businesses. <br>Fewer tasks. More customers.
+                    Clear results.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Init_Launch_Sequence 🚀</a>
+                    <a href="#solutions" class="btn btn-hollow">Explore_Modules</a>
+                </div>
+
+                <div style="margin-top: 5rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                    <div
+                        style="background: rgba(0,0,0,0.3); padding: 1.5rem 2rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem; color: var(--accent-secondary);">⚡</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; text-transform: uppercase;">Stop Manual Work</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">> Automate_Tasks.exe</div>
+                        </div>
+                    </div>
+                    <div
+                        style="background: rgba(0,0,0,0.3); padding: 1.5rem 2rem; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem; color: var(--accent-primary);">📈</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; text-transform: uppercase;">Increase Revenue</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">> Optimize_Flows.exe</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTIONS -->
+        <section id="solutions" class="container">
+            <div class="section-header">
+                <h2>System Modules</h2>
+                <p class="text-accent">Ready to Deploy</p>
+            </div>
+
+            <div class="spotlight-grid" id="card-container">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/internet.svg" alt="Website"></div>
+                        <h3>Custom Websites</h3>
+                        <p>High-performant, responsive interfaces designed to convert traffic into qualified leads.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/crm.svg" alt="CRM"></div>
+                        <h3>CRM Database</h3>
+                        <p>Centralized customer tracking with automated reminders and analytics dashboards.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/automation.svg" alt="Automation"></div>
+                        <h3>Automations</h3>
+                        <p>Invoice generation, booking logic, and auto-responses running on autopilot.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/chatbot.svg" alt="AI Agent"></div>
+                        <h3>AI Agents</h3>
+                        <p>24/7 intelligent support bots to capture leads and answer queries instantly.</p>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/ecom.svg" alt="E-Commerce"></div>
+                        <h3>E-Commerce</h3>
+                        <p>Full-stack online store solutions with secure payment gateways and inventory sync.</p>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-box"><img src="assets/marketing.svg" alt="Branding"></div>
+                        <h3>Brand Identity</h3>
+                        <p>Cohesive visual design systems to establish market authority and recognition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section id="results" style="padding: 6rem 0; margin-top: 6rem; position: relative;">
+            <div style="position: absolute; inset: 0; background: var(--bg-darker); z-index: -1;"></div>
+            <div class="container text-center">
+                <h2>Performance Metrics</h2>
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-top: 4rem;">
+                    <div>
+                        <div
+                            style="font-size: 4rem; font-weight: 800; color: var(--accent-secondary); text-shadow: 0 0 20px var(--accent-secondary);">
+                            +42%</div>
+                        <p style="color: white; font-family: monospace;">> BOOKING_RATE</p>
+                    </div>
+                    <div>
+                        <div
+                            style="font-size: 4rem; font-weight: 800; color: var(--accent-primary); text-shadow: 0 0 20px var(--accent-primary);">
+                            7h</div>
+                        <p style="color: white; font-family: monospace;">> HOURS_SAVED_WEEKLY</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 4rem; font-weight: 800; color: white; text-shadow: 0 0 20px white;">2x
+                        </div>
+                        <p style="color: white; font-family: monospace;">> ENGAGEMENT_VELOCITY</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="pricing-section container">
+            <div class="section-header">
+                <h2>Deployment Packages</h2>
+                <p>Transparent Protocols</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-col">
+                    <h3>Starter Protocol</h3>
+                    <div class="price-tag">RM1200</div>
+                    <ul class="feature-list">
+                        <li>Landing Page + Contact</li>
+                        <li>1 Week Delivery</li>
+                        <li>Basic SEO Setup</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-hollow"
+                        style="width: 100%; display: block; text-align: center;">Execute Starter</a>
+                </div>
+
+                <div class="pricing-col featured">
+                    <h3>Growth Protocol</h3>
+                    <div class="price-tag">Quote Only</div>
+                    <ul class="feature-list">
+                        <li>Custom Website (Multi-page)</li>
+                        <li>Booking System & CRM</li>
+                        <li>2-3 Week Delivery</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary"
+                        style="width: 100%; display: block; text-align: center;">Execute Growth</a>
+                </div>
+
+                <div class="pricing-col">
+                    <h3>Automation Protocol</h3>
+                    <div class="price-tag">Quote Only</div>
+                    <ul class="feature-list">
+                        <li>Invoice & Reminder Flows</li>
+                        <li>Chat Lead Capture</li>
+                        <li>Custom Integrations</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-hollow"
+                        style="width: 100%; display: block; text-align: center;">Execute Auto</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="container contact-section">
+            <div class="glass-form">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Initiate Partnership</h2>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Transmission Received!');">
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            ENTITY_NAME</label>
+                        <input type="text" class="form-input" required placeholder="Business Name">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            OPERATOR_NAME</label>
+                        <input type="text" class="form-input" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            COMMS_LINK</label>
+                        <input type="tel" class="form-input" required placeholder="Phone / WhatsApp">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            MISSION_BRIEF</label>
+                        <textarea class="form-input" rows="4" placeholder="Describe requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT DATA</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="margin-bottom: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="mailto:info@zencode.my" class="nav-link" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/1FeuCvavxQ/?mibextid=wwXIfr" target="_blank" class="nav-link"
+                    aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/zencode.my" target="_blank" class="nav-link" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://tiktok.com/@zencode.my" target="_blank" class="nav-link" aria-label="TikTok">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M9 0h1.98c.144.715.54 1.617 1.093 2.512C12.43 3.013 13.09 3.546 14 3.97v3.08c-.705.109-1.354.408-1.928.847-.394.301-.734.681-1 .11V6.997c0-.232-.014-.49-.033-.768a4.981 4.981 0 0 0-.967.625A5.05 5.05 0 0 0 9 8.017V0z" />
+                        <path d="M9 13v-3.08c1.376-1.554 4.094-1.127 5-.29V13h-5z" />
+                        <!-- Simplified path for brevity, standard one preferred -->
+                        <!-- Using a cleaner path for Tiktok -->
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                    </svg>
+                </a>
+            </div>
+            <p>&copy; <span id="year">2025</span> ZENCODE SOFTWARE LABS. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Spotlight Effect ---
+        const cards = document.querySelectorAll('.card');
+        const cardContainer = document.getElementById('card-container');
+
+        if (cardContainer) {
+            cardContainer.addEventListener('mousemove', (e) => {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    // Just simple spotlight calc
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        }
+
+        // --- Raining Lasers Logic ---
+        function createRain() {
+            const container = document.getElementById('rain-container');
+            const streamCount = 12; // Reduced for Zen feel
+
+            for (let i = 0; i < streamCount; i++) {
+                const stream = document.createElement('div');
+                stream.className = 'data-stream';
+                stream.style.left = Math.random() * 95 + '%';
+                stream.style.height = (Math.random() * 100 + 100) + 'px';
+                // Much slower animation: 5s to 12s
+                stream.style.animationDuration = (Math.random() * 7 + 5) + 's';
+                stream.style.animationDelay = (Math.random() * 5) + 's';
+
+                // Varied opacity for depth, slightly subtler
+                stream.style.opacity = Math.random() * 0.4 + 0.1;
+
+                container.appendChild(stream);
+            }
+
+            // Scroll opacity logic
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                // Fade out faster, e.g., by 50% of the page
+                const opacity = Math.max(0, 1 - (scrollY / (maxScroll * 0.6)));
+                container.style.opacity = opacity;
+            });
+        }
+        createRain();
+
+        // --- Intersection Observer ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(sec => {
+            sec.style.opacity = 0;
+            sec.style.transform = 'translateY(30px)';
+            sec.style.transition = 'all 0.8s ease-out';
+            observer.observe(sec);
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
