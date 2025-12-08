@@ -847,32 +847,48 @@
         <section id="contact" class="container contact-section">
             <div class="glass-form">
                 <h2 style="text-align: center; margin-bottom: 2rem;">Initiate Partnership</h2>
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Transmission Received!');">
+                <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                    <!-- Access Key (Replace with your own from web3forms.com) -->
+                    <input type="hidden" name="access_key" value="1d93322d-8e51-400b-83be-4a0f93eb0254">
+                    <input type="hidden" name="subject" value="New Submission from Zencode Website">
+                    <input type="hidden" name="from_name" value="Zencode Website">
+
                     <div class="form-group">
                         <label
                             style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
                             ENTITY_NAME</label>
-                        <input type="text" class="form-input" required placeholder="Business Name">
+                        <input type="text" name="business_name" class="form-input" required placeholder="Business Name">
                     </div>
                     <div class="form-group">
                         <label
                             style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
                             OPERATOR_NAME</label>
-                        <input type="text" class="form-input" required placeholder="Your Name">
+                        <input type="text" name="name" class="form-input" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
+                            REPLY_FREQUENCY</label>
+                        <input type="email" name="email" class="form-input" required
+                            placeholder="Email Address (Critical for reply)">
                     </div>
                     <div class="form-group">
                         <label
                             style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
                             COMMS_LINK</label>
-                        <input type="tel" class="form-input" required placeholder="Phone / WhatsApp">
+                        <input type="tel" name="phone" class="form-input" required placeholder="Phone / WhatsApp">
                     </div>
                     <div class="form-group">
                         <label
                             style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
                             MISSION_BRIEF</label>
-                        <textarea class="form-input" rows="4" placeholder="Describe requirements..."></textarea>
+                        <textarea name="message" class="form-input" rows="4"
+                            placeholder="Describe requirements..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT DATA</button>
+                    <!-- hCaptcha Widget -->
+                    <div class="h-captcha" data-captcha="true"></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">TRANSMIT
+                        DATA</button>
                 </form>
             </div>
         </section>
@@ -989,6 +1005,22 @@
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+    <!-- Web3Forms Script -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
+
+    <!-- hCaptcha Validation Script -->
+    <script>
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function (e) {
+            const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
+            if (!hCaptcha) {
+                e.preventDefault();
+                alert("Please verify you are human.");
+                return;
+            }
+        });
     </script>
 </body>
 
