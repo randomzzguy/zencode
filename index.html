@@ -10,23 +10,23 @@
     <meta name="keywords"
         content="Web Design, Business Automation, AI Tools, CRM, Digital Growth, Zencode, Small Business Software, Custom Websites">
     <meta name="author" content="Zencode">
-    <link rel="canonical" href="https://zencode.com/">
+    <link rel="canonical" href="https://zencode.my/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://zencode.com/">
+    <meta property="og:url" content="https://zencode.my/">
     <meta property="og:title" content="Zencode • Build Smarter. Grow Faster.">
     <meta property="og:description"
         content="Zencode helps small businesses grow with custom websites, CRM automations, and AI tools. Save time and increase revenue with our digital solutions.">
-    <meta property="og:image" content="https://zencode.com/assets/fullLogoV2.svg">
+    <meta property="og:image" content="https://zencode.my/assets/fullLogoV2.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://zencode.com/">
+    <meta property="twitter:url" content="https://zencode.my/">
     <meta property="twitter:title" content="Zencode • Build Smarter. Grow Faster.">
     <meta property="twitter:description"
         content="Zencode helps small businesses grow with custom websites, CRM automations, and AI tools. Save time and increase revenue with our digital solutions.">
-    <meta property="twitter:image" content="https://zencode.com/assets/fullLogoV2.svg">
+    <meta property="twitter:image" content="https://zencode.my/assets/fullLogoV2.svg">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -34,9 +34,9 @@
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Zencode",
-      "image": "https://zencode.com/assets/fullLogoV2.svg",
-      "@id": "https://zencode.com",
-      "url": "https://zencode.com",
+      "image": "https://zencode.my/assets/fullLogoV2.svg",
+      "@id": "https://zencode.my",
+      "url": "https://zencode.my",
       "telephone": "",
       "priceRange": "$$",
       "address": {
@@ -651,6 +651,133 @@
             box-shadow: 0 0 15px rgba(228, 82, 88, 0.3);
             background: rgba(228, 82, 88, 0.05);
         }
+
+        /* --- Toast Notifications --- */
+        #toast-container {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: rgba(30, 25, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--surface-border);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slide-in-down 0.4s ease-out forwards;
+            pointer-events: auto;
+            min-width: 300px;
+            font-family: var(--font-body);
+        }
+
+        .toast.success {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(228, 82, 88, 0.2);
+        }
+
+        .toast.error {
+            border-color: #ff4444;
+        }
+
+        @keyframes slide-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-out {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        /* --- Phone Input Group --- */
+        .phone-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .phone-select {
+            width: 130px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .phone-select option {
+            background: var(--bg-dark);
+            color: white;
+        }
+
+        .phone-select:focus,
+        .custom-code-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .custom-code-input {
+            width: 130px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            display: none;
+            /* Hidden by default */
+        }
+
+        /* --- Button Loading --- */
+        .btn.loading {
+            color: transparent !important;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-top: -10px;
+            margin-left: -10px;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
@@ -876,7 +1003,24 @@
                         <label
                             style="display: block; margin-bottom: 0.5rem; color: var(--accent-primary); font-family: monospace;">//
                             COMMS_LINK</label>
-                        <input type="tel" name="phone" class="form-input" required placeholder="Phone / WhatsApp">
+                        <div class="phone-group">
+                            <select name="country_code" class="phone-select" aria-label="Country Code">
+                                <option value="+60">MY +60</option>
+                                <option value="+65">SG +65</option>
+                                <option value="+1">US +1</option>
+                                <option value="+44">UK +44</option>
+                                <option value="+61">AU +61</option>
+                                <option value="+86">CN +86</option>
+                                <option value="+81">JP +81</option>
+                                <option value="+91">IN +91</option>
+                                <option value="+971">AE +971</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <input type="text" id="customCode" name="custom_code" class="custom-code-input"
+                                placeholder="+" maxlength="5" aria-label="Custom Country Code">
+                            <input type="tel" name="phone" id="phoneInput" class="form-input" required
+                                placeholder="Phone / WhatsApp" style="margin-bottom: 0;">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label
@@ -886,7 +1030,8 @@
                             placeholder="Describe requirements..."></textarea>
                     </div>
                     <!-- hCaptcha Widget -->
-                    <div class="h-captcha" data-captcha="true"></div>
+                    <div class="h-captcha" data-captcha="true" style="margin: 0 auto 1.5rem auto; display: table;">
+                    </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">TRANSMIT
                         DATA</button>
                 </form>
@@ -1010,16 +1155,106 @@
     <!-- Web3Forms Script -->
     <script src="https://web3forms.com/client/script.js" async defer></script>
 
-    <!-- hCaptcha Validation Script -->
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Contact Form Logic -->
     <script>
         const form = document.getElementById('contactForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const countrySelect = form.querySelector('[name="country_code"]');
+        const customCodeInput = document.getElementById('customCode');
+
+        // Toggle "Other" behavior
+        countrySelect.addEventListener('change', function () {
+            if (this.value === 'other') {
+                this.style.display = 'none';
+                customCodeInput.style.display = 'block';
+                customCodeInput.value = '+';
+                customCodeInput.focus();
+            }
+        });
+
+        // Revert to dropdown if custom code is cleared or invalid
+        customCodeInput.addEventListener('blur', function () {
+            if (this.value === '' || this.value === '+') {
+                this.style.display = 'none';
+                countrySelect.style.display = 'block';
+                countrySelect.value = '+60'; // Default back to first option or specific one
+            }
+        });
+
+        function showToast(message, type = 'normal') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            let icon = 'ℹ️';
+            if (type === 'success') icon = '✅';
+            if (type === 'error') icon = '⚠️';
+
+            toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(toast);
+
+            // Remove after 5 seconds
+            setTimeout(() => {
+                toast.style.animation = 'fade-out 0.5s ease-in forwards';
+                toast.addEventListener('animationend', () => toast.remove());
+            }, 5000);
+        }
+
         form.addEventListener('submit', function (e) {
-            const hCaptcha = form.querySelector('textarea[name=h-captcha-response]').value;
-            if (!hCaptcha) {
-                e.preventDefault();
-                alert("Please verify you are human.");
+            e.preventDefault();
+
+            // Check hCaptcha
+            const hCaptchaVal = form.querySelector('[name=h-captcha-response]').value;
+            if (!hCaptchaVal) {
+                showToast("Please complete the verify check.", 'error');
                 return;
             }
+
+            // Loading State
+            submitBtn.classList.add('loading');
+            showToast("Initiating secure transmission...", 'normal');
+
+            const formData = new FormData(form);
+
+            // Handle Country Code Logic
+            let finalCountryCode = countrySelect.value;
+            if (window.getComputedStyle(customCodeInput).display !== 'none') {
+                finalCountryCode = customCodeInput.value;
+            }
+
+            // Combine or override
+            formData.delete('country_code'); // Remove duplicate if any
+            formData.delete('custom_code'); // Clean up
+            formData.append('country_code', finalCountryCode);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+                .then(async (response) => {
+                    const json = await response.json();
+                    if (response.status === 200) {
+                        showToast("Transmission Successful. Expect contact soon.", 'success');
+                        form.reset();
+                        // Reset interactions
+                        customCodeInput.style.display = 'none';
+                        countrySelect.style.display = 'block';
+                        countrySelect.value = '+60';
+                    } else {
+                        console.error(response);
+                        showToast(json.message || "Transmission failed. Try again.", 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    showToast("Connection interruption. Check network.", 'error');
+                })
+                .finally(() => {
+                    submitBtn.classList.remove('loading');
+                });
         });
     </script>
 </body>
