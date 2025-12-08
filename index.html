@@ -71,6 +71,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" as="style">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -282,7 +283,8 @@
 
         .logo object {
             height: 55px;
-            width: auto;
+            width: 150px;
+            /* Approximate ratio for CLS prevention */
             filter: drop-shadow(0 0 5px var(--accent-primary));
             pointer-events: none;
         }
@@ -310,9 +312,27 @@
             position: relative;
         }
 
-        .nav-link:hover {
-            color: white;
-            text-shadow: 0 0 8px white;
+        @media(max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(45, 38, 39, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                border-radius: var(--radius-md);
+                border: 1px solid rgba(228, 82, 88, 0.3);
+                margin-top: 1rem;
+                text-align: center;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
         }
 
         .nav-link::after {
@@ -778,6 +798,179 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* --- FAQ Accordion --- */
+        .faq-item {
+            background: rgba(30, 25, 26, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(30, 25, 26, 0.8);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            padding-right: 2rem;
+            position: relative;
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            color: var(--text-muted);
+        }
+
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+
+        .faq-answer-inner {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+
+        /* --- Testimonials --- */
+        .quote-card {
+            background: rgba(45, 38, 39, 0.6);
+            border: 1px solid rgba(228, 82, 88, 0.2);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .quote-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .quote-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent-primary);
+            border: 2px solid rgba(228, 82, 88, 0.3);
+        }
+
+        /* --- Privacy Modal --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: rgba(30, 25, 26, 0.95);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-primary);
+        }
+
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .btn-text:hover {
+            opacity: 1;
+            color: var(--accent-primary);
+        }
     </style>
 </head>
 
@@ -796,7 +989,7 @@
             <a href="#results" class="nav-link">Results</a>
             <a href="#contact" class="btn btn-primary">Book Free Call</a>
         </div>
-        <button class="mobile-toggle" aria-label="Menu" onclick="alert('Menu functionality wrapper')">☰</button>
+        <button class="mobile-toggle" aria-label="Menu" onclick="toggleMenu()">☰</button>
     </nav>
 
     <main>
@@ -848,7 +1041,8 @@
                 <!-- Card 1 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/internet.svg" alt="Custom Website Design"></div>
+                        <div class="icon-box"><img src="assets/internet.svg" alt="Custom Website Design" width="45"
+                                height="45" loading="lazy"></div>
                         <h3>Custom Websites</h3>
                         <p>High-performant, responsive interfaces designed to convert traffic into qualified leads.</p>
                     </div>
@@ -856,7 +1050,8 @@
                 <!-- Card 2 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/crm.svg" alt="CRM Database System"></div>
+                        <div class="icon-box"><img src="assets/crm.svg" alt="CRM Database System" width="45" height="45"
+                                loading="lazy"></div>
                         <h3>CRM Database</h3>
                         <p>Centralized customer tracking with automated reminders and analytics dashboards.</p>
                     </div>
@@ -864,7 +1059,8 @@
                 <!-- Card 3 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/automation.svg" alt="Business Automation Tools"></div>
+                        <div class="icon-box"><img src="assets/automation.svg" alt="Business Automation Tools"
+                                width="45" height="45" loading="lazy"></div>
                         <h3>Automations</h3>
                         <p>Invoice generation, booking logic, and auto-responses running on autopilot.</p>
                     </div>
@@ -872,7 +1068,8 @@
                 <!-- Card 4 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/chatbot.svg" alt="AI Support Agents"></div>
+                        <div class="icon-box"><img src="assets/chatbot.svg" alt="AI Support Agents" width="45"
+                                height="45" loading="lazy"></div>
                         <h3>AI Agents</h3>
                         <p>24/7 intelligent support bots to capture leads and answer queries instantly.</p>
                     </div>
@@ -880,7 +1077,8 @@
                 <!-- Card 5 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/ecom.svg" alt="E-Commerce Solutions"></div>
+                        <div class="icon-box"><img src="assets/ecom.svg" alt="E-Commerce Solutions" width="45"
+                                height="45" loading="lazy"></div>
                         <h3>E-Commerce</h3>
                         <p>Full-stack online store solutions with secure payment gateways and inventory sync.</p>
                     </div>
@@ -888,7 +1086,8 @@
                 <!-- Card 6 -->
                 <div class="card">
                     <div class="card-content">
-                        <div class="icon-box"><img src="assets/marketing.svg" alt="Brand Identity Design"></div>
+                        <div class="icon-box"><img src="assets/marketing.svg" alt="Brand Identity Design" width="45"
+                                height="45" loading="lazy"></div>
                         <h3>Brand Identity</h3>
                         <p>Cohesive visual design systems to establish market authority and recognition.</p>
                     </div>
@@ -919,6 +1118,58 @@
                         <div style="font-size: 4rem; font-weight: 800; color: white; text-shadow: 0 0 20px white;">2x
                         </div>
                         <p style="color: white; font-family: monospace;">> ENGAGEMENT_VELOCITY</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="container" style="padding: 6rem 0;">
+            <div class="section-header">
+                <h2>Client Feedback</h2>
+                <p class="text-accent">Protocol Verification</p>
+            </div>
+
+            <div class="spotlight-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <!-- Testimonial 1 -->
+                <div class="quote-card">
+                    <div style="color: var(--accent-primary); font-size: 2rem; margin-bottom: 1rem;">“</div>
+                    <p class="quote-text">Automating our booking flow saved us 15 hours/week. The system just runs in
+                        the background perfectly.</p>
+                    <div class="quote-author">
+                        <div class="author-avatar">SL</div>
+                        <div>
+                            <div style="color: white; font-weight: 600;">Sarah L.</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Clinic Director</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="quote-card">
+                    <div style="color: var(--accent-primary); font-size: 2rem; margin-bottom: 1rem;">“</div>
+                    <p class="quote-text">Finally a developer who doesn't speak in jargon. Simple, fast, and exactly
+                        what we needed to launch.</p>
+                    <div class="quote-author">
+                        <div class="author-avatar">MT</div>
+                        <div>
+                            <div style="color: white; font-weight: 600;">Mark T.</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Retail Founder</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="quote-card">
+                    <div style="color: var(--accent-primary); font-size: 2rem; margin-bottom: 1rem;">“</div>
+                    <p class="quote-text">Our conversion rate doubled in the first month. The investment paid for itself
+                        almost immediately.</p>
+                    <div class="quote-author">
+                        <div class="author-avatar">JD</div>
+                        <div>
+                            <div style="color: white; font-weight: 600;">James D.</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">E-com Manager</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -966,6 +1217,119 @@
                     </ul>
                     <a href="#contact" class="btn btn-hollow"
                         style="width: 100%; display: block; text-align: center;">Execute Auto</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="container" style="padding: 6rem 0;">
+            <div class="section-header">
+                <h2>System Query Protocol</h2>
+                <p class="text-accent">Common Objections Resolved</p>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <!-- Q1 -->
+                <div class="faq-item">
+                    <div class="faq-question">What is the deployment timeline?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>For standard "Starter" modules, we deploy within <span class="text-primary">7
+                                    days</span>. Custom "Growth" systems typically require 2-4 weeks depending on
+                                complexity and integration requirements.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q2 -->
+                <div class="faq-item">
+                    <div class="faq-question">Do I own the source code?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. Upon final payment, full intellectual property rights and access codes are
+                                transferred to you. We do not lock you into proprietary platforms.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q3 -->
+                <div class="faq-item">
+                    <div class="faq-question">Are there recurring maintenance fees?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>No mandatory monthly fees. We offer optional support packages for updates and server
+                                management, but the core system is yours to run cost-free (excluding standard
+                                hosting/domain costs).</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q4 -->
+                <div class="faq-item">
+                    <div class="faq-question">Can you integrate with my existing software?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Absolutely. Our "Automation Protocol" is designed to hook into tools like WhatsApp,
+                                Google Sheets, Slack, and generic CRMs via API connections.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q5 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">What makes Zencode different from other software agencies?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We focus on simplicity, speed, and practical solutions. No technical confusion — just
+                                clean, efficient tools built specifically for your workflow.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q6 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to understand tech to work with you?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Not at all. You tell us the problem, and we translate it into a solution. Everything is
+                                explained in clear, simple language.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q7 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">How much will my project cost?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>After the free assessment, we give you a clear fixed quote based on your exact needs. No
+                                hidden fees or surprise charges.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q8 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">Can you improve or fix my existing system or automation?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>Yes. We can troubleshoot, rebuild, or extend tools created by previous developers or
+                                platforms.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q9 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">What if I’m not sure what exact solution I need?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>That’s normal. We’ll analyze your workflow during the assessment and recommend the
+                                simplest, most cost-effective solution.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Q10 (New) -->
+                <div class="faq-item">
+                    <div class="faq-question">What industries do you work with?</div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            <p>We support a wide range of industries — retail, logistics, services, healthcare,
+                                education, and more. If you have a workflow, we can optimize it.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1074,6 +1438,9 @@
                 </a>
             </div>
             <p>&copy; <span id="year">2025</span> ZENCODE SOFTWARE LABS. ALL RIGHTS RESERVED.</p>
+            <div style="margin-top: 1rem;">
+                <button onclick="openPrivacyModal()" class="btn-text">Privacy Policy</button>
+            </div>
         </div>
     </footer>
 
@@ -1126,6 +1493,19 @@
         }
         createRain();
 
+        // --- Mobile Menu Logic ---
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('active');
+        }
+
+        // Close menu/modal when clicking links
+        document.querySelectorAll('.nav-link, .btn').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
         // --- Intersection Observer ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1144,8 +1524,93 @@
             observer.observe(sec);
         });
 
+        // --- Privacy Modal Logic ---
+        function openPrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close on outside click
+        const privacyModal = document.getElementById('privacy-modal');
+        if (privacyModal) {
+            privacyModal.addEventListener('click', (e) => {
+                if (e.target === privacyModal) {
+                    closePrivacyModal();
+                }
+            });
+        }
+
+        // --- FAQ Logic ---
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+
+                // Close others (optional - nice for focus)
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== parent) {
+                        other.classList.remove('active');
+                        other.querySelector('.faq-answer').style.maxHeight = null;
+                    }
+                });
+
+                // Toggle current
+                parent.classList.toggle('active');
+                const answer = parent.querySelector('.faq-answer');
+
+                if (parent.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = null;
+                }
+            });
+        });
+
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+
+    <!-- Privacy Modal -->
+    <div id="privacy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePrivacyModal()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--accent-primary);">Privacy Policy</h2>
+            <div style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                <p style="margin-bottom: 1rem;"><strong>Effective Date:</strong> December 9, 2024</p>
+
+                <h3 style="color: white; margin: 1rem 0 0.5rem;">1. Information Collection</h3>
+                <p style="margin-bottom: 1rem;">We collect information you provide directly to us via our contact forms,
+                    including name, email, phone number, and business details. We also collect anonymous usage data to
+                    improve our website performance.</p>
+
+                <h3 style="color: white; margin: 1rem 0 0.5rem;">2. Use of Information</h3>
+                <p style="margin-bottom: 1rem;">Your data is used solely for communication regarding your project
+                    inquiries and to deliver requested services. We do not sell or share your personal information with
+                    third parties for marketing purposes.</p>
+
+                <h3 style="color: white; margin: 1rem 0 0.5rem;">3. Data Security</h3>
+                <p style="margin-bottom: 1rem;">We implement industry-standard security measures to protect your data.
+                    However, no method of transmission over the Internet is 100% secure.</p>
+
+                <h3 style="color: white; margin: 1rem 0 0.5rem;">4. Cookies</h3>
+                <p style="margin-bottom: 1rem;">This site uses basic cookies for functionality and analytics. You can
+                    control cookie settings through your browser.</p>
+
+                <h3 style="color: white; margin: 1rem 0 0.5rem;">5. Contact</h3>
+                <p style="margin-bottom: 1rem;">For privacy concerns, contact us at <a href="mailto:info@zencode.my"
+                        style="color: var(--accent-primary);">info@zencode.my</a>.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Web3Forms Script -->
     <script src="https://web3forms.com/client/script.js" async defer></script>
