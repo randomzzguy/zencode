@@ -271,8 +271,13 @@
         .logo object {
             height: 55px;
             width: 150px;
+            /* Filter removed for default state */
+            pointer-events: none;
+            transition: filter 0.3s ease;
+        }
+
+        .logo:hover object {
             filter: drop-shadow(0 0 5px var(--accent-primary));
-            pointer-events: none
         }
 
         .nav-links {
@@ -941,6 +946,43 @@
             opacity: 1;
             color: var(--accent-primary)
         }
+
+        /* --- Scroll to Top --- */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: rgba(45, 38, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(228, 82, 88, 0.2);
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-top-btn:hover {
+            background: var(--accent-primary);
+            color: white;
+            box-shadow: 0 0 30px rgba(228, 82, 88, 0.6);
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 
@@ -955,8 +997,9 @@
         </a>
         <div class="nav-links">
             <a href="#solutions" class="nav-link">Solutions</a>
+            <a href="#reviews" class="nav-link">Reviews</a>
             <a href="#pricing" class="nav-link">Pricing</a>
-            <a href="#results" class="nav-link">Results</a>
+            <a href="#faq" class="nav-link">FAQ</a>
             <a href="#contact" class="btn btn-primary">Book Free Call</a>
         </div>
         <button class="mobile-toggle" aria-label="Menu" onclick="toggleMenu()">☰</button>
@@ -1094,7 +1137,7 @@
         </section>
 
         <!-- TESTIMONIALS -->
-        <section class="container" style="padding: 6rem 0;">
+        <section id="reviews" class="container" style="padding: 6rem 0;">
             <div class="section-header">
                 <h2>Client Feedback</h2>
                 <p class="text-accent">Protocol Verification</p>
@@ -1414,6 +1457,14 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
     <script>
         // --- Spotlight Effect ---
         const cards = document.querySelectorAll('.card');
@@ -1520,6 +1571,21 @@
                 }
             });
         }
+
+        // --- Scroll to Top Logic ---
+        const scrollTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         // --- FAQ Logic ---
         document.querySelectorAll('.faq-question').forEach(item => {
