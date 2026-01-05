@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "url": "https://github.com/randomzzguy/zencode/releases/download/v1.1.0/PCMS_Suite_Installer_v1.1.0.exe",
-    "notes": "Testing live app updates!"
+    "notes": "Added invoice regeneration and multi-select features. Batch actions for opening, deleting, and generating PDFs are now supported."
 }
