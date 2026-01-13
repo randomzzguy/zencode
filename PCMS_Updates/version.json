@@ -1,5 +1,5 @@
 {
-    "version": "1.1.3",
-    "url": "https://github.com/randomzzguy/zencode/releases/download/v1.1.3/PCMS_Suite_Installer_v1.1.3.exe",
-    "notes": "Added invoice regeneration and multi-select features. Batch actions for opening, deleting, and generating PDFs are now supported."
+    "version": "1.1.4",
+    "url": "https://github.com/randomzzguy/zencode/releases/download/v1.1.4/PCMS_Suite_Installer_v1.1.4.exe",
+    "notes": "Critical fix for PDF generation (added winldd dependency), improved installer reliability for external drives, and confirmed Job Calendar data sync via main database."
 }
