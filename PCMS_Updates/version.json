@@ -1,5 +1,5 @@
 {
-    "version": "1.1.5",
-    "url": "https://github.com/randomzzguy/zencode/releases/download/v1.1.5/PCMS_Suite_Installer_v1.1.5.exe",
+    "version": "1.1.6",
+    "url": "https://github.com/randomzzguy/zencode/releases/download/v1.1.6/PCMS_Suite_Installer_v1.1.6.exe",
     "notes": "Critical fix for PDF generation (added winldd dependency), improved installer reliability for external drives, and confirmed Job Calendar data sync via main database."
 }
