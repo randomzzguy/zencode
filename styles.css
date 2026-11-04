@@ -51,13 +51,13 @@
 html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .site-header{height:var(--header-height)}
 .brand img{display:block;width:100%;height:auto}
-.site-header .brand.nav-brand{display:inline-flex;width:auto;align-items:center;gap:14px}
-.site-header .nav-brand img{width:64px;height:64px;object-fit:contain;flex-shrink:0;border-radius:12px}
-.nav-brand-name{font:500 32px/1 var(--body);letter-spacing:-.04em;color:var(--ink)}
+.site-header .brand.nav-brand{display:inline-flex;width:auto;align-items:center;gap:10px}
+.site-header .nav-brand img{width:28px;height:28px;object-fit:contain;flex-shrink:0;border-radius:5px}
+.nav-brand-name{font:500 26px/1 var(--body);letter-spacing:-.04em;color:var(--ink)}
 .footer-details .brand{width:clamp(230px,24vw,300px);max-width:100%}
 .service-block{scroll-margin-top:var(--header-height)}
 .theme-industries .industry-list article{scroll-margin-top:calc(var(--header-height) + 14px)}
 @media(min-width:851px) and (max-width:1050px){.site-header{gap:20px}#main-nav{gap:18px}}
-@media(max-width:850px){:root{--header-height:88px}.site-header{gap:18px}.site-header .brand.nav-brand{gap:12px}.site-header .nav-brand img{width:60px;height:60px}.nav-brand-name{font-size:28px}.menu-toggle{gap:14px;padding-left:10px}#main-nav{top:calc(var(--header-height) - 1px);max-height:calc(100dvh - var(--header-height))}.footer-details .brand{width:280px}}
+@media(max-width:850px){:root{--header-height:88px}.site-header{gap:18px}.site-header .brand.nav-brand{gap:8px}.site-header .nav-brand img{width:26px;height:26px}.nav-brand-name{font-size:24px}.menu-toggle{gap:14px;padding-left:10px}#main-nav{top:calc(var(--header-height) - 1px);max-height:calc(100dvh - var(--header-height))}.footer-details .brand{width:280px}}
 @media(max-width:600px){.footer-details .brand{width:260px}}
-@media(max-width:360px){:root{--header-height:80px}.site-header{gap:10px}.site-header .brand.nav-brand{gap:10px}.site-header .nav-brand img{width:52px;height:52px}.nav-brand-name{font-size:26px}.menu-toggle{gap:10px;padding-left:4px}}
+@media(max-width:360px){:root{--header-height:80px}.site-header{gap:10px}.site-header .brand.nav-brand{gap:8px}.site-header .nav-brand img{width:24px;height:24px}.nav-brand-name{font-size:22px}.menu-toggle{gap:10px;padding-left:4px}}
