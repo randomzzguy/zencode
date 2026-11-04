@@ -1,8 +1,10 @@
+> Historical artwork iteration, superseded by `assets/projects/qlynk-cover-v4.webp`. This document is not published as site content.
+
 # Qlynk project cover
 
 Generated using the built-in image generation tool with the supplied `logoWhite.png` as the brand reference. This is brand artwork, not a product screenshot.
 
-Published asset: `assets/projects/qlynk-cover-v2.webp`
+Historical asset: `assets/projects/qlynk-cover-v2.webp`
 
 ## Final prompt
 

@@ -18,3 +18,10 @@ Public GitHub repository metadata was reviewed for additional work. Projects wit
 - **Musaed** (owner-supplied `Zeyad/musaed-agent` folder): README, `docs/FAMILY_EXPERIENCE.md`, `docs/FAMILY_JOURNEYS.md`, `docs/AGENT_TOOLS.md`, `family_experience.py` and the application UI labels. Local inference, bilingual UI, citations, family-led planning and draft-only actions are described with their boundaries. The site makes no clinical or eligibility decisions and publishes no personal report content.
 
 All three new visual presentations are responsive, code-rendered editorial reconstructions based on the documented visual direction and workflows. They use generic, illustrative labels rather than screenshots of authenticated workspaces. The decorative activity bars have no units or performance claims. No source databases, generated reports, uploads, environment files, credentials, family documents or private application assets were copied into the website.
+
+## Discovery audit, 5 November 2026
+
+- Business legal name and SSM registration come directly from the owner’s instructions. The studio is described as based in Malaysia; no unapproved street address or opening hours were added.
+- Qlynk’s current cover is the owner-directed generated product workflow illustration. TapRepute uses the owner-supplied `og.png`, web-optimized without changing the composition. Its summary reflects cardless link/QR access; future NFC is not claimed as an available feature.
+- Static social images for Ancora, Hi-Tech, Musaed and PCMS are captures of this website’s existing illustrative interfaces, without authenticated data.
+- Markdown, sitemap and LLM files reuse the public service, industry and project records. Private provenance notes and form implementation fields are not exported.

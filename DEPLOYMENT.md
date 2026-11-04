@@ -1,26 +1,28 @@
-# Vercel deployment and domain handover
+# Production hosting
 
-The rebuilt site is deployed at https://zencode-website.vercel.app in the owner's existing Vercel account, project `zencode-website`. Source changes remain in this local checkout; no Git commit or push was performed.
+Canonical website: https://zencode.my. Vercel project: `randomzzguys-projects/zencode-website`. The secondary address, https://zencode-website.vercel.app, remains available for review; page canonicals point to the custom domain.
 
-`zencode.my` is attached to the project, but its Porkbun DNS still points to GitHub Pages. The current live custom-domain website therefore remains unchanged until DNS is updated.
+The domain migration to Vercel is complete. On 5 November 2026, the root domain resolved to Vercel and both custom hostnames served the rebuilt site over HTTPS. DNS is managed at Porkbun. Use current Vercel Domains settings for any future DNS changes; do not reuse historical setup records without checking. Preserve email records and unrelated subdomains.
 
-## Porkbun DNS change
+The preferred URL is the root domain without `www`. The configuration includes a permanent redirect from `www.zencode.my`, with matching canonical URLs in HTML, structured data, the sitemap and LLM references.
 
-Vercel's domain verification returned these recommended records during this task:
-
-| Type | Host | Value |
-| --- | --- | --- |
-| A | @ | 216.198.79.1 |
-| A | @ | 64.29.17.1 |
-| CNAME | www | 7c0e9ce73fc34055.vercel-dns-017.com |
-
-Replace the existing root A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153` with the two recommended A records above. Configure `www` with the CNAME shown. Preserve mail/MX/TXT records and unrelated subdomains. There is no need to move the domain registration or nameservers. The app redirects `www.zencode.my` to the canonical `zencode.my` address.
-
-Re-check recommendations in Vercel before making a future DNS change, since provider values can change:
+## Build and deploy
 
 ```sh
-vercel domains verify zencode.my --scope randomzzguys-projects
-vercel domains verify www.zencode.my --scope randomzzguys-projects
+npm ci
+npm run build
+npm run check
+vercel deploy --prod --yes --scope randomzzguys-projects
 ```
 
-Once DNS has propagated, verify HTTPS and the home, work and contact pages on the custom domain. The existing Web3Forms key was retained. Form success and failure behavior was tested using intercepted local responses; the real hCaptcha widget loads on the deployed site. No live test enquiry was sent, so end-to-end mailbox delivery remains a manual check.
+Vercel installs dependencies and serves `dist/`. Commit and push source changes when ready; a manual deployment does not create a Git commit. Git-based Vercel deployments use the connected repository. The existing GitHub Pages workflow can still build the static output, but Vercel is the production host for the custom domain.
+
+## Release verification
+
+- Check HTTPS, the preferred hostname, navigation, project pages and unknown-page 404 responses.
+- Check `/robots.txt`, `/sitemap.xml`, `/llms.txt`, `/llms-full.txt` and `/index.md`.
+- Confirm Markdown documents use `text/markdown` and HTML remains indexable.
+- Run metadata/link checks and browser smoke tests before release.
+- Real mailbox delivery is a separate manual check: automated enquiry tests intercept submissions and do not send messages.
+
+No private environment files, source databases, family reports or authenticated project records belong in `dist/`. `.env*`, `.vercel/`, scratch previews and private provenance notes are excluded from deployment inputs.

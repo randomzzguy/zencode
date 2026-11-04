@@ -1,8 +1,10 @@
+> Historical artwork iteration, superseded by `assets/projects/qlynk-cover-v4.webp`. This document is not published as site content.
+
 # Qlynk cover — professional revision
 
 Created using built-in imagegen with the supplied Qlynk logo as the reference.
 
-Saved asset: `assets/projects/qlynk-cover-v3.webp` (1536 × 1024).
+Historical asset: `assets/projects/qlynk-cover-v3.webp` (1536 × 1024).
 
 ## Final prompt
 

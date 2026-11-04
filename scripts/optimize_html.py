@@ -26,4 +26,16 @@ def optimize_html(file_path):
     print(f"Optimized {file_path}")
 
 if __name__ == "__main__":
-    optimize_html("c:\\Users\\hhcre\\Desktop\\Zeyad\\Zencode\\website\\index.html")
+    import argparse
+    from pathlib import Path
+
+    parser = argparse.ArgumentParser(description="Minify inline CSS in generated HTML files.")
+    parser.add_argument("paths", nargs="*", default=["dist"], help="HTML files or output directories (default: dist)")
+    args = parser.parse_args()
+    for target in args.paths:
+        target_path = Path(target)
+        if not target_path.exists():
+            parser.error(f"Path does not exist: {target_path}. Run npm run build first.")
+        files = sorted(target_path.rglob("*.html")) if target_path.is_dir() else [target_path]
+        for file_path in files:
+            optimize_html(file_path)

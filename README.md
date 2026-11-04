@@ -19,6 +19,9 @@ Optional browser smoke checks: with Python Playwright and Chromium installed and
 
 ## Editing
 
+- `content/site.mjs`: business identity, canonical domain, service-oriented page metadata and project search titles.
+- `scripts/seo.mjs`: consistent Open Graph/Twitter metadata, actual image dimensions and structured data.
+- `scripts/discovery.mjs`: robots, sitemap, Markdown documents and LLM reference files generated from public content.
 - `content/projects.json`: project summaries, case studies, categories, source links and stage labels.
 - `content/flagship-projects.json`: Ancora AI, Hi-Tech Waste Management and Musaed, including scope, workflows and engineering decisions.
 - `scripts/build.mjs`: shared layout, page content and HTML generation.
@@ -37,14 +40,20 @@ Optional browser smoke checks: with Python Playwright and Chromium installed and
 
 `vercel.json` builds the website and serves `dist/`. Each page and case study has a real URL; unknown paths use `404.html`. The GitHub Pages workflow also builds and checks the same output, so the existing hosting remains compatible during migration. Canonicals and the generated sitemap use `https://zencode.my`.
 
-Vercel project: `randomzzguys-projects/zencode-website`. Review URL: https://zencode-website.vercel.app. Deploy subsequent local changes with `vercel deploy --prod --scope randomzzguys-projects`. GitHub repository integration is connected; local edits must be committed and pushed before Git-based deployments will contain them. See `DEPLOYMENT.md` for the remaining domain migration step.
+Vercel project: `randomzzguys-projects/zencode-website`. Review URL: https://zencode-website.vercel.app. Deploy subsequent local changes with `vercel deploy --prod --scope randomzzguys-projects`. GitHub repository integration is connected; local edits must be committed and pushed before Git-based deployments will contain them. The custom domain is connected to Vercel; see `DEPLOYMENT.md` for release and domain checks.
 
 The form retains the original website's public Web3Forms access key and hCaptcha integration. It only reports success when the API confirms success, retains messages on errors, and provides email and WhatsApp alternatives. No secrets or backend environment variables are required. The public access key is intended for browser forms. Automated browser QA must intercept submissions rather than send real enquiries.
 
 The original one-file website has been replaced by generated routes; use the commands above instead of opening an index file directly.
 
-The current build contains 20 pages and 12 project stories. The homepage project rail supports native touch/trackpad scrolling, previous/next buttons and arrow keys, Home and End when focused. It does not auto-rotate. All three product previews are labelled interface studies with illustrative content, not live connections to the source applications. Private operational and family records are never bundled. Motion honors the operating-system preference and the site's pause control.
+The current build contains 20 pages and 12 project stories. The homepage project rail features six interleaved projects and supports native touch/trackpad scrolling, previous/next buttons and arrow keys, Home and End when focused. It does not auto-rotate. Industrial and desktop previews are labelled interface studies with illustrative content, not live connections to source applications. Private operational and family records are never bundled. Motion honors the operating-system preference and the site's pause control.
 
 The current visual system uses Barlow Condensed headlines, Outfit body text, square edges and broad coral, cream and peach sections. The original logo, warm charcoal background, coral palette and moving grid/rain remain. All 20 page layouts were rebuilt around short, direct copy and larger project presentations.
 
 Animation checks: `python scripts/motion-smoke.py` verifies scroll reveals, hover movement, accordion reversals, motion preferences and cleanup in Chromium against the local server. See `MOTION.md` for the upstream references and behavior.
+
+## Search and agent-readable content
+
+`npm run build` generates 20 HTML pages, 19 Markdown alternates, `robots.txt`, `sitemap.xml`, `llms.txt` and `llms-full.txt`. The sitemap contains the 19 indexable HTML URLs. The 404 is noindex; Markdown alternatives are marked noindex in Vercel so HTML is the search destination. Agents can still fetch the public Markdown files.
+
+Business identity, page metadata and project titles live in `content/site.mjs`. Capabilities and industries use `content/site-copy.mjs`; all project references use the same JSON files as the portfolio. No fixed package/pricing offers, invented ratings or outcome metrics are added to schema. See `SEO_AUDIT.md` for the audit and validation scope. Edit sources, then rebuild; do not hand-edit generated discovery files in `dist/`.
