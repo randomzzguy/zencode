@@ -1,3 +1,10 @@
 # Ignore large installer files
 PCMS_Updates/PCMS_Suite_Installer_v1.1.0.exe
 *.exe
+.preview/
+node_modules/
+dist/
+.vercel/
+
+.vercel
+.env*

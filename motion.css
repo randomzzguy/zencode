@@ -1,0 +1,49 @@
+/* Interaction finishes complement Motion's compositor-driven scroll reveals. */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+.button,.header-contact,.hero-scroll,.rail-controls button{position:relative;isolation:isolate}
+.button:not(.plain),.header-contact{overflow:hidden}
+.button:not(.plain):before,.header-contact:before{content:'';position:absolute;inset:-1px;z-index:-1;background:var(--peach);transform:translateY(102%);transition:transform .45s var(--motion-ease);pointer-events:none}
+.button.dark:before{background:var(--ink)}
+.button>span,.card-open,.range-project>div>span,.need-arrow,.footer-big-arrow{transition:transform .55s var(--motion-ease),background .3s,color .3s}
+.button.plain{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:0 2px;transition:background-size .5s var(--motion-ease),color .25s}
+.project-card h3,.range-project h3{transition:color .3s}
+.need-grid>a{isolation:isolate;overflow:hidden}
+.need-grid>a:before{content:'';position:absolute;inset:0;background:#e4525818;z-index:-1;transform:scaleY(0);transform-origin:bottom;transition:transform .55s var(--motion-ease)}
+.need-grid h3,.service-accordion summary h3,.industry-links .button,.interest-options button{transition:transform .45s var(--motion-ease),color .25s,background .25s}
+.service-accordion summary,.faq-list summary{position:relative}
+.service-accordion summary:after,.faq-list summary:after{content:'';height:1px;position:absolute;left:0;right:0;bottom:0;background:var(--coral);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--motion-ease)}
+.contact-layout input:not([type=hidden]):not([type=checkbox]),.contact-layout textarea{transition:border-color .25s,background .25s,box-shadow .25s}
+.contact-layout input:focus,.contact-layout textarea:focus{border-color:var(--peach);background:#fffdf509;box-shadow:0 3px 0 #e4525840}
+.brand img{transition:filter .4s}
+.motion-active .resthouse-visual>img{transition:none}
+.motion-active .card-image{transform-origin:center;transition:none}
+.motion-active .hero h1 em:after{transform-origin:left;animation:underline-enter 1s .35s var(--motion-ease) both}
+@keyframes underline-enter{from{transform:rotate(-2deg) scaleX(0)}to{transform:rotate(-2deg) scaleX(1)}}
+.motion-active .project-link:hover .card-image>.system-visual{transform:scale(1.025)}
+/* Stagger is handled in JS; no CSS hides page content before it can initialize. */
+@media(hover:hover) and (pointer:fine){
+ .motion-active .button:not(.plain):hover:before,.motion-active .header-contact:hover:before{transform:translateY(0)}
+ .motion-active .button:hover>span{transform:translate(5px,-5px)}
+ .motion-active .button.plain:hover{background-size:100% 2px}
+ .motion-active .project-link:hover .card-open{transform:translate(-8px,-8px) rotate(-5deg);background:var(--ink)}
+ .motion-active .project-link:hover h3{color:var(--peach)}
+ .motion-active .range-project:hover h3{color:#bb3038}
+ .motion-active .range-project:hover>div>span{transform:translate(5px,-5px) rotate(-7deg)}
+ .motion-active .need-grid>a:hover:before{transform:scaleY(1)}
+ .motion-active .need-grid>a:hover h3{transform:translateY(-4px);color:var(--peach)}
+ .motion-active .need-grid>a:hover .need-arrow{transform:translate(6px,-6px) rotate(-8deg)}
+ .motion-active .service-accordion summary:hover h3{transform:translateX(9px);color:var(--peach)}
+ .motion-active .service-accordion summary:hover:after,.motion-active .faq-list summary:hover:after{transform:scaleX(1)}
+ .motion-active .industry-links .button:hover{transform:translateX(6px);color:var(--peach)}
+ .motion-active .interest-options button:hover{padding-left:10px;color:var(--peach)}
+ .motion-active .footer-big-link:hover .footer-big-arrow{transform:translate(10px,-10px) rotate(-7deg)}
+ .motion-active .brand:hover img{filter:drop-shadow(0 0 8px #e4525860)}
+}
+.button:focus-visible:before,.header-contact:focus-visible:before{transform:translateY(0)}
+.project-link:focus-visible .card-open{background:var(--ink)}
+.service-accordion summary:focus-visible:after,.faq-list summary:focus-visible:after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+.motion-paused *,.motion-paused *:before,.motion-paused *:after{transition:none!important}
+html:not(.motion-active) [data-motion-surface]{transform:none!important;opacity:1!important}
+@media(hover:none){.project-link:hover .card-image>.project-visual,.project-link:hover .card-image>.system-visual,.motion-active .project-link:hover .card-image>.system-visual,.range-project:hover .project-visual:not(.resthouse-visual)>img{transform:none}}
+@media print{.ambient,.ticker{display:none}*{animation:none!important;transform:none!important;opacity:1!important}}

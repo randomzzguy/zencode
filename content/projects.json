@@ -1,0 +1,304 @@
+[
+  {
+    "slug": "dinkframe",
+    "name": "DINKFRAME",
+    "industry": "Sports & creative commerce",
+    "category": "Platforms",
+    "type": "Product build",
+    "image": "dinkframe.webp",
+    "color": "#d7f64c",
+    "headline": "From a great shot to a complete customer journey.",
+    "summary": "A home for a pickleball creative studio, connecting poster orders, client updates and the production workflow.",
+    "challenge": "A custom creative service needs more than a beautiful storefront. Customers need to share their brief and images, follow progress, review the work and receive their final files.",
+    "approach": "We brought the public website, customer portal and production workspace into one application. A guided ordering flow collects the right details, while the studio can manage payment review, production stages and delivery in one place.",
+    "features": [
+      [
+        "A guided first step",
+        "An order journey for creative briefs, player details and image uploads."
+      ],
+      [
+        "A connected workflow",
+        "Customer order tracking, review drafts, amendments and final delivery."
+      ],
+      [
+        "A practical studio workspace",
+        "An administrative queue, payment review and controlled production updates."
+      ]
+    ],
+    "services": [
+      "Web application",
+      "Customer portal",
+      "Workflow automation"
+    ],
+    "note": "A connected product experience covering discovery, ordering, customer updates and studio operations."
+  },
+  {
+    "slug": "phyziolab",
+    "name": "Phyziolab",
+    "industry": "Healthcare & wellbeing",
+    "category": "Websites",
+    "type": "Business website",
+    "image": "phyziolab.webp",
+    "color": "#a5e1b4",
+    "headline": "Helping people find their next step toward better movement.",
+    "summary": "A clear, energetic online presence for a sports physiotherapy practice in Ipoh.",
+    "challenge": "Choosing a physiotherapist starts with trust. People need to understand the approach, explore services and know where to go without wading through confusing language.",
+    "approach": "We organized the practice around the questions a new visitor brings: who it helps, what care looks like, who is behind it and how to get in touch. Strong typography and purposeful motion give the site a confident, active identity.",
+    "features": [
+      [
+        "Clear service information",
+        "Treatment options and the practice’s approach presented in an accessible structure."
+      ],
+      [
+        "People behind the practice",
+        "Team and movement-focused content help visitors understand the experience."
+      ],
+      [
+        "A direct next step",
+        "Location information, directions and a clear contact path for prospective patients."
+      ]
+    ],
+    "services": [
+      "Website design",
+      "Content structure",
+      "Responsive development"
+    ],
+    "url": "https://phyziolab.my",
+    "note": "This project showcases the practice’s public website, not a medical records or clinical decision system."
+  },
+  {
+    "slug": "resthouse",
+    "name": "The Resthouse",
+    "industry": "Hospitality & heritage",
+    "category": "Websites",
+    "type": "Brand website",
+    "image": "resthouse-photo.webp",
+    "color": "#b1c4d6",
+    "headline": "A remarkable place deserves a story you can feel.",
+    "summary": "An immersive digital introduction to a heritage home on Perhentian Besar.",
+    "challenge": "The Resthouse is more than a place to stay. Its history, architecture and relationship with the island need space to come through before a visitor thinks about their trip.",
+    "approach": "We built a flowing editorial experience around the house’s journey, using moving imagery, a historical timeline, architectural details and a browsable gallery. The result gives the destination its own pace and personality online.",
+    "features": [
+      [
+        "A cinematic introduction",
+        "A full-screen video sets the atmosphere for the island and the house."
+      ],
+      [
+        "A story worth exploring",
+        "Heritage, architecture and conservation form a connected narrative."
+      ],
+      [
+        "Details within reach",
+        "A visual gallery and visitor information bring the experience closer."
+      ]
+    ],
+    "services": [
+      "Brand storytelling",
+      "Website design",
+      "Interactive gallery"
+    ],
+    "url": "https://resthouse-web.vercel.app",
+    "note": "An editorial website centered on heritage, conservation and the visitor experience."
+  },
+  {
+    "slug": "ranya",
+    "name": "Ranya Ibrahim Ahmed",
+    "industry": "Publishing & education",
+    "category": "Platforms",
+    "type": "Author & commerce website",
+    "image": "ranya.webp",
+    "color": "#edbf76",
+    "headline": "A welcoming world for stories, readers and new possibilities.",
+    "summary": "An author’s creative identity, children’s books and professional services brought together in one place.",
+    "challenge": "An independent author needs to introduce their work, connect with readers and collaborators, and make it easy to explore and order books.",
+    "approach": "We paired a warm editorial design with a product catalogue, cart and account experience. The site also gives writing, editing and book development services a clear place alongside the books.",
+    "features": [
+      [
+        "An author’s own space",
+        "A personal introduction, creative work and professional services in one coherent experience."
+      ],
+      [
+        "Books to browse",
+        "Product details and a shopping cart connect discovery to an order journey."
+      ],
+      [
+        "Behind the storefront",
+        "Account, order and administration flows support the wider commerce experience."
+      ]
+    ],
+    "services": [
+      "Online store",
+      "Personal brand",
+      "Account & order flows"
+    ],
+    "url": "https://aunty-ranya-website.vercel.app",
+    "note": "A website and commerce experience for an independent author, with space for books and creative services."
+  },
+  {
+    "slug": "pcms",
+    "name": "PCMS Operations Suite",
+    "industry": "Marine & technical services",
+    "category": "Systems",
+    "type": "Client software",
+    "image": null,
+    "color": "#aebbd4",
+    "headline": "Software shaped around the way a specialist business works.",
+    "summary": "A Windows operations suite bringing invoices, certificates, technical reports and verification into one workflow.",
+    "challenge": "Specialist operations can leave teams moving between documents, emails, records and repeated administrative tasks. Off-the-shelf tools do not always fit the details.",
+    "approach": "We brought core workflows into a local-first desktop application: consistent documents, structured records, role-aware access and verification. The system also supports reviewed email assistance and controlled software updates.",
+    "features": [
+      [
+        "Consistent documentation",
+        "Invoices, certificates and technical reports built around the business’s actual workflow."
+      ],
+      [
+        "Connected operational records",
+        "Local records, permissions and QR verification support day-to-day use."
+      ],
+      [
+        "Designed for ongoing use",
+        "Backups, migrations and controlled updates support the application over time."
+      ]
+    ],
+    "services": [
+      "Custom business software",
+      "Document automation",
+      "Desktop development"
+    ],
+    "note": "The visual is a simplified interface illustration. No client records, vessel details or private operational data are shown."
+  },
+  {
+    "slug": "qlynk",
+    "name": "Qlynk",
+    "industry": "AI & digital products",
+    "category": "AI & automation",
+    "type": "Independent product",
+    "image": "qlynk-cover-v4.webp",
+    "color": "#badbde",
+    "headline": "Business knowledge, ready for a conversation.",
+    "summary": "A no-code platform for creating AI agents grounded in approved business knowledge.",
+    "challenge": "Businesses want useful answers for their customers and teams, with control over what an agent knows, how it responds and where it appears.",
+    "approach": "Qlynk connects knowledge uploads, agent configuration, hosted pages, website widgets and analytics. Owners can define the agent’s scope and learn where their information needs to improve.",
+    "features": [
+      [
+        "Knowledge with a purpose",
+        "Approved material, topic boundaries and owner-defined instructions shape the agent."
+      ],
+      [
+        "Where customers need it",
+        "Hosted agent pages and embedded website delivery."
+      ],
+      [
+        "A complete product experience",
+        "Account management, subscriptions, analytics and knowledge-gap workflows."
+      ]
+    ],
+    "services": [
+      "AI agents",
+      "SaaS development",
+      "Knowledge systems"
+    ],
+    "url": "https://qlynk.site",
+    "note": "An independent product in our body of work. Agent behavior depends on its configuration and knowledge sources."
+  },
+  {
+    "slug": "dry-skateboards",
+    "name": "DRY Skateboards",
+    "industry": "Lifestyle & retail",
+    "category": "Websites",
+    "type": "Brand exploration",
+    "image": "dry.webp",
+    "color": "#d9bb93",
+    "headline": "A digital identity with a little more attitude.",
+    "summary": "A skate and streetwear website exploring expressive product presentation and brand storytelling.",
+    "challenge": "A lifestyle brand needs an online experience with a distinctive point of view, where products and the culture behind them feel connected.",
+    "approach": "The DRY explorations combine editorial product layouts, motion and Abu Dhabi-inspired campaign storytelling. They demonstrate how a website can express a brand beyond a conventional product grid.",
+    "features": [
+      [
+        "Brand-led presentation",
+        "A visual direction rooted in skate and streetwear culture."
+      ],
+      [
+        "Products with context",
+        "Editorial layouts give merchandise a place within the broader brand story."
+      ],
+      [
+        "Motion with personality",
+        "Animated presentation adds energy to the browsing experience."
+      ]
+    ],
+    "services": [
+      "Creative direction",
+      "Website design",
+      "Motion design"
+    ],
+    "note": "A brand exploration from our wider body of work, focused on digital identity and product storytelling.",
+    "source": "https://github.com/randomzzguy/dry-skateboards-merged"
+  },
+  {
+    "slug": "taprepute",
+    "name": "TapRepute",
+    "industry": "Local businesses & services",
+    "category": "Platforms",
+    "type": "Prototype",
+    "image": "taprepute-cover-v2.webp",
+    "color": "#d0d7ab",
+    "headline": "Making customer feedback easier to give—and more useful.",
+    "summary": "A feedback product connecting QR codes, links and NFC entry points to a business dashboard.",
+    "challenge": "Local businesses need a simple way to hear from customers and understand feedback without making the experience long or uncomfortable.",
+    "approach": "The prototype connects a quick mobile feedback journey to private business insights. Every customer receives the same optional route to Google, regardless of their rating.",
+    "features": [
+      [
+        "A simple entry point",
+        "Link and QR access let customers reach the mobile feedback flow."
+      ],
+      [
+        "Useful context",
+        "Source-aware insights help a business understand where feedback begins."
+      ],
+      [
+        "An equal path for everyone",
+        "Optional Google continuation is available for every rating."
+      ]
+    ],
+    "services": [
+      "Product prototyping",
+      "Mobile experience",
+      "Business dashboard"
+    ],
+    "note": "Validation-stage prototype. Google-link visits are not represented as confirmed public reviews."
+  },
+  {
+    "slug": "aegis",
+    "name": "Aegis Trading Lab",
+    "industry": "Data & research",
+    "category": "Systems",
+    "type": "Research project",
+    "image": "aegis.webp",
+    "color": "#b1bbc7",
+    "headline": "Turning complex data into questions you can test.",
+    "summary": "A research environment for market data, backtesting, paper trading and risk analysis.",
+    "challenge": "An idea can look convincing before real-world costs, changing conditions and the quality of the underlying data are considered.",
+    "approach": "Aegis separates data validation, research, simulation, risk checks and reporting. Its emphasis is on repeatable experiments and evidence that can be inspected, including results that do not support a strategy.",
+    "features": [
+      [
+        "Structured research",
+        "Validated data and repeatable experiments make the reasoning traceable."
+      ],
+      [
+        "Realistic simulation",
+        "Fees, slippage and chronological testing are part of the research process."
+      ],
+      [
+        "Clear boundaries",
+        "Paper execution and risk controls keep research separate from live orders."
+      ]
+    ],
+    "services": [
+      "Data systems",
+      "Research dashboards",
+      "Python development"
+    ],
+    "note": "Research and paper-trading software only. No live orders, investment advice or profitability claims."
+  }
+]

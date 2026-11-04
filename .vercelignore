@@ -1,0 +1,7 @@
+.git
+.github
+.preview
+.env*
+node_modules
+dist
+content/SOURCES.md
