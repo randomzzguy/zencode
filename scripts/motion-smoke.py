@@ -41,7 +41,7 @@ async def main():
   await page.locator('.motion-toggle').click()
   await page.wait_for_function("!document.documentElement.classList.contains('motion-active')")
   assert await page.locator('.hero h1').evaluate('(e)=>getComputedStyle(e).transform')=='none'
-  assert await page.locator('.resthouse-visual img').evaluate('(e)=>e.getAnimations().length')==0
+  assert await page.locator('.resthouse-visual img').first.evaluate('(e)=>e.getAnimations().length')==0
   assert await h.evaluate('(e)=>getComputedStyle(e).opacity')=='1'
   await page.reload()
   assert not await page.locator('html').evaluate('(e)=>e.classList.contains("motion-active")')

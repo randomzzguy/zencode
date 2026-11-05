@@ -28,7 +28,9 @@ async def main():
   await page.set_viewport_size({'width':1440,'height':1000})
   await page.goto('http://localhost:4173/')
   assert await page.locator('.work-slide').count()==6
-  assert await page.locator('.rail-prev').is_disabled()
+  assert   await page.locator('.rail-prev').is_disabled()
+  await page.locator('.rail-next').scroll_into_view_if_needed()
+  await page.wait_for_timeout(400)
   await page.locator('.rail-next').click()
   await page.wait_for_function("document.querySelector('.rail-count').textContent==='02 / 06'")
   await page.wait_for_timeout(700)

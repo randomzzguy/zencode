@@ -15,17 +15,20 @@
   matchMedia('(min-width:851px)').addEventListener('change', closeMenu);
 
   const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
-  const motionButton = document.querySelector('.motion-toggle');
+  const motionButtons = [...document.querySelectorAll('.motion-toggle, .client-pause')];
   let manuallyPaused = false;
   try { manuallyPaused = localStorage.getItem('zencode-motion') === 'paused'; } catch {}
   let paused = motionQuery.matches || manuallyPaused;
   const updateMotion = () => {
     document.documentElement.classList.toggle('motion-paused', paused);
-    motionButton.textContent = motionQuery.matches ? 'Reduced motion enabled' : paused ? 'Resume motion' : 'Pause motion';
-    motionButton.setAttribute('aria-pressed', String(paused));
-    motionButton.disabled = motionQuery.matches;
+    const label = motionQuery.matches ? 'Reduced motion enabled' : paused ? 'Resume motion' : 'Pause motion';
+    for (const button of motionButtons) {
+      button.textContent = label;
+      button.setAttribute('aria-pressed', String(paused));
+      button.disabled = motionQuery.matches;
+    }
   };
-  motionButton.addEventListener('click', () => {
+  for (const button of motionButtons) button.addEventListener('click', () => {
     manuallyPaused = !manuallyPaused; paused = manuallyPaused || motionQuery.matches; updateMotion();
     try { localStorage.setItem('zencode-motion', paused ? 'paused' : 'running'); } catch {}
   });

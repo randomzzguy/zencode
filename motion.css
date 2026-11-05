@@ -17,7 +17,7 @@
 .brand img{transition:filter .4s}
 .motion-active .resthouse-visual>img{transition:none}
 .motion-active .card-image{transform-origin:center;transition:none}
-.motion-active .hero h1 em:after{transform-origin:left;animation:underline-enter 1s .35s var(--motion-ease) both}
+.motion-active .hero h1 em:after{transform-origin:left;animation:underline-enter 1s .35s var(--motion-ease) both,hero-underline 9s linear infinite}
 @keyframes underline-enter{from{transform:rotate(-2deg) scaleX(0)}to{transform:rotate(-2deg) scaleX(1)}}
 .motion-active .project-link:hover .card-image>.system-visual{transform:scale(1.025)}
 /* Stagger is handled in JS; no CSS hides page content before it can initialize. */
@@ -46,4 +46,4 @@
 .motion-paused *,.motion-paused *:before,.motion-paused *:after{transition:none!important}
 html:not(.motion-active) [data-motion-surface]{transform:none!important;opacity:1!important}
 @media(hover:none){.project-link:hover .card-image>.project-visual,.project-link:hover .card-image>.system-visual,.motion-active .project-link:hover .card-image>.system-visual,.range-project:hover .project-visual:not(.resthouse-visual)>img{transform:none}}
-@media print{.ambient,.ticker{display:none}*{animation:none!important;transform:none!important;opacity:1!important}}
+@media print{.ambient,.client-showcase{display:none}*{animation:none!important;transform:none!important;opacity:1!important}}

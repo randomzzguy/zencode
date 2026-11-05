@@ -10,6 +10,7 @@ const decode=text=>text.replaceAll('&amp;','&').replaceAll('&quot;','"').replace
 const projects=[...JSON.parse(await readFile('content/flagship-projects.json','utf8')),...JSON.parse(await readFile('content/projects.json','utf8'))];
 for(const file of pages){
  const html=await readFile(file,'utf8');
+ if(!html.includes(`>Work<sup>${projects.length}</sup></a>`))errors.push(`${file}: incorrect navbar project count`);
  if((html.match(/<h1[ >]/g)||[]).length!==1)errors.push(`${file}: expected one h1`);
  if(!html.includes('<title>')||!html.includes('name="description"'))errors.push(`${file}: missing page metadata`);
  const relative=path.relative(root,file).replaceAll('\\','/');
