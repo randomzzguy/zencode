@@ -20,6 +20,14 @@ The observer source informed once-per-visit entrances and disconnection on clean
 - Native service/FAQ details animate between measured heights and handle rapid reversals. Keyboard clicks use the same path.
 - The mobile menu and visible filter results enter in short sequences.
 
+## Home page effects (`home-fx.js`)
+
+A plain script that loads only on the home page, separate from the Motion bundle.
+
+- **Hero glyph field:** a full-width canvas dot matrix behind the hero. Around the pointer, dots get pushed aside and turn into code glyphs (ink, then peach, then coral), with a small coordinate readout. Clicking sends a shockwave ripple. After 2.2 s with no pointer movement (and always on touch), a wandering ghost cursor takes over and sends a ripple every few seconds, so the hero never sits still.
+- **Client orbit:** every client plate sits on a 3D Fibonacci sphere, with a canvas network (silhouette, orbit rings, nearest-neighbour links and travelling packets) drawn behind it. Dragging spins it with inertia, and on phones `touch-action: pan-y` keeps vertical scrolling. Clicking or keyboard-focusing a plate rotates it to the front. Hovering slows the spin, and the "Now facing" readout follows the front-most client.
+- Both effects stop while offscreen or in a background tab. Pause motion or reduced motion stops them too: the hero shows a static dot grid and the client section falls back to a plain logo grid, which is also the no-JS markup.
+
 ## Motion preferences and lifecycle
 
 The existing Pause motion control and OS reduced-motion preference disable the entire enhancement. In-flight controls and observers are cancelled, accordion state is settled, and animated inline styles are restored. A CSS fallback keeps content visible during any final animation-engine style flush. Manual pause survives reload and OS preference changes. Background tabs suspend the enhancement; back/forward restoration and viewport capability changes reinitialize it without replaying visited reveals.
