@@ -105,18 +105,13 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .client-pause:hover,.client-pause[aria-pressed=true]{background:var(--bg);color:var(--ink);border-color:var(--bg)}
 .client-orbit{position:relative;min-width:0}
 .client-orbit-net{display:none}
-.client-orbit-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
-.client-node{margin:0}
-.client-plate{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:8px;height:104px;padding:13px 13px 10px;margin:0;background:var(--ink);border:1px solid #2d26271c;isolation:isolate}
-.client-plate--dark{background:var(--bg);border-color:#fffdf524;color:var(--ink)}
-.client-plate-index{font:500 9px/1 var(--body);letter-spacing:.08em;color:#b8323a}
-.client-plate--dark .client-plate-index{color:var(--peach)}
-.client-plate-logo{display:flex;align-items:center;justify-content:center;height:40px;padding-inline:4px}
-.client-plate-logo img{display:block;width:auto;height:auto;max-width:100%;max-height:38px;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
-.client-plate--light .client-plate-logo img{mix-blend-mode:multiply}
-.client-plate--dark .client-plate-logo img{mix-blend-mode:screen}
-.client-plate figcaption{font:500 8px/1.25 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#5e5152;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.client-plate--dark figcaption{color:#d7cbc8}
+.client-showcase{--logo-scale:1}
+.client-orbit-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px 10px}
+.client-node{position:relative;margin:0;display:grid;place-items:center;min-height:112px}
+.client-sticker{margin:0;line-height:0}
+.client-sticker img{display:block;width:calc(var(--w) * var(--logo-scale) * .56px);max-width:100%;height:auto;pointer-events:none;-webkit-user-drag:none;user-select:none}
+.client-name{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.client-index{position:absolute;top:0;left:0;padding:4px 5px 3px;background:var(--bg);color:var(--ink);font:600 9px/1 var(--body);letter-spacing:.08em;font-variant-numeric:tabular-nums;transition:background .25s,color .25s}
 .client-showcase a:focus-visible,.client-showcase button:focus-visible{outline-color:var(--bg)}
 /* 3D orbit: enabled by home-fx.js only while motion is allowed; otherwise the grid above is the experience. */
 .client-showcase.is-orbit .client-readout{display:grid}
@@ -125,12 +120,13 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .client-showcase.is-orbit .client-orbit.is-dragging{cursor:grabbing}
 .client-showcase.is-orbit .client-orbit-net{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .client-showcase.is-orbit .client-orbit-list{display:block;position:absolute;inset:0}
-.client-showcase.is-orbit .client-node{position:absolute;left:0;top:0;width:146px;will-change:transform,opacity;outline:none;transform-origin:50% 50%}
-.client-showcase.is-orbit .client-plate{height:96px;box-shadow:0 18px 40px -22px #2d262799;transition:box-shadow .3s,border-color .3s}
-.client-showcase.is-orbit .client-node.is-front .client-plate{border-color:var(--coral);box-shadow:0 0 0 1px var(--coral),0 26px 50px -24px #e4525899}
-.client-showcase.is-orbit .client-node.is-hover .client-plate,.client-showcase.is-orbit .client-node:focus-visible .client-plate{border-color:var(--coral);box-shadow:0 0 0 2px var(--coral),0 26px 50px -20px #e45258aa}
-@media(max-width:1250px){.client-showcase.is-orbit .client-node{width:122px}.client-showcase.is-orbit .client-plate{height:82px;padding:11px 11px 8px;gap:5px}.client-showcase.is-orbit .client-plate-logo{height:34px}.client-showcase.is-orbit .client-plate-logo img{max-height:32px}}
+.client-showcase.is-orbit .client-node{position:absolute;left:0;top:0;display:block;min-height:0;will-change:transform,opacity;outline:none;transform-origin:50% 50%;border-radius:14px}
+.client-showcase.is-orbit .client-sticker img{width:calc(var(--w) * var(--logo-scale) * 1px);max-width:none}
+.client-showcase.is-orbit .client-index{top:calc((var(--pad) - 4) * var(--logo-scale) * 1px);left:calc((var(--pad) - 4) * var(--logo-scale) * 1px);transform:translate(-50%,-50%)}
+.client-showcase.is-orbit .client-node.is-front .client-index,.client-showcase.is-orbit .client-node.is-hover .client-index{background:var(--coral);color:var(--ink)}
+.client-showcase.is-orbit .client-node:focus-visible{outline:2px solid var(--coral);outline-offset:-6px}
+@media(max-width:1250px){.client-showcase{--logo-scale:.82}}
 @media(max-width:1000px){.client-showcase-inner{grid-template-columns:1fr}.client-showcase-copy{display:grid;grid-template-columns:1fr auto;align-items:end;column-gap:24px}.client-showcase-copy .eyebrow,.client-showcase-copy h2{grid-column:1}.client-showcase-count{grid-column:2;grid-row:1/3;margin:0}.client-readout,.client-showcase-actions{grid-column:1/-1}.client-readout{max-width:none}}
 @media(max-width:850px){.client-showcase{padding:52px 0}.client-showcase.is-orbit .client-orbit{height:min(560px,112vw)}}
-@media(max-width:600px){.client-showcase{padding:42px 0}.client-showcase-copy{display:flex;align-items:flex-start}.client-showcase-copy h2{font-size:clamp(42px,12vw,58px)}.client-showcase-count{margin-top:22px}.client-showcase-count strong{font-size:56px}.client-orbit-list{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}.client-showcase.is-orbit .client-node{width:112px}.client-showcase.is-orbit .client-plate{height:76px;padding:9px 9px 7px;gap:4px}.client-showcase.is-orbit .client-plate-logo{height:30px}.client-showcase.is-orbit .client-plate-logo img{max-height:28px}.client-showcase.is-orbit .client-plate figcaption{font-size:7px}.client-pause{padding-inline:12px;font-size:9px}}
+@media(max-width:600px){.client-showcase{padding:42px 0}.client-showcase-copy{display:flex;align-items:flex-start}.client-showcase-copy h2{font-size:clamp(42px,12vw,58px)}.client-showcase-count{margin-top:22px}.client-showcase-count strong{font-size:56px}.client-orbit-list{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px 6px}.client-node{min-height:88px}.client-showcase{--logo-scale:.6}.client-pause{padding-inline:12px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.client-pause,.client-hint{display:none}}

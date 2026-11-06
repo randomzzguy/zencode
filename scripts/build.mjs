@@ -7,6 +7,7 @@ import { sectionIntro } from './page-intros.mjs';
 import { renderArrowIcons } from './icons.mjs';
 import { pageSeo } from './seo.mjs';
 import { writeDiscovery } from './discovery.mjs';
+import { buildClientLogos } from './client-logos.mjs';
 import { site } from '../content/site.mjs';
 import { capabilities, industries } from '../content/site-copy.mjs';
 
@@ -17,44 +18,11 @@ await mkdir(out,{recursive:true});
 const esc = s => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const arrow = '<span aria-hidden="true">↗</span>';
 const num = n => String(n).padStart(2,'0');
-// Client logos are read from the asset folder so the showcase always reflects
-// the complete set, including SVGs and filenames with spaces.
-const clientLogoDir = path.join(root,'assets','ClientLogos');
-const clientLogoFiles = (await readdir(clientLogoDir,{withFileTypes:true}))
-  .filter(entry => entry.isFile() && /\.(svg|png|jpe?g|webp)$/i.test(entry.name))
-  .map(entry => entry.name)
-  .sort((a,b) => a.localeCompare(b,'en',{sensitivity:'base',numeric:true}));
-const displayLogoFiles = new Set(await readdir(path.join(root,'assets','client-logo-display')));
-const clientLogoCatalog = {
-  'Aegis.png': { name: 'Aegis', tone: 'dark' },
-  'Ancora.png': { name: 'Ancora', tone: 'dark' },
-  'corpolgia.svg': { name: 'Corpolgia', tone: 'light' },
-  'DBYN.png': { name: 'DBYN', tone: 'light' },
-  'DinkFrame.png': { name: 'DinkFrame', tone: 'dark' },
-  'Dinkit.png': { name: 'Dinkit', tone: 'light' },
-  'DRY.png': { name: 'DRY', tone: 'dark' },
-  'eissyaPhysio.png': { name: 'Eissya Physio', tone: 'light' },
-  'Hi-Tech.png': { name: 'Hi-Tech', tone: 'light' },
-  'hulahoop.png': { name: 'Hulahoop', tone: 'light' },
-  'Kelab Belia Progresif Logo.png': { name: 'Kelab Belia Progresif', tone: 'dark' },
-  'MOPLogo.png': { name: 'MOP', tone: 'light' },
-  'Musaed.png': { name: 'Musaed', tone: 'light' },
-  'mutawa.png': { name: 'Mutawa', tone: 'light' },
-  'PCMS.png': { name: 'PCMS', tone: 'dark' },
-  'Phyziolab.png': { name: 'Phyziolab', tone: 'light' },
-  'pixelPounders.png': { name: 'Pixel Pounders', tone: 'light' },
-  'Qlynk.png': { name: 'Qlynk', tone: 'dark' },
-  'ranyaIbrahim.png': { name: 'Ranya Ibrahim', tone: 'light' },
-  'resthouse.jpg': { name: 'The Resthouse', tone: 'light' },
-  'TapRepute.png': { name: 'TapRepute', tone: 'light' },
-  'ZD.png': { name: 'ZD', tone: 'dark' },
-  'zshield.png': { name: 'Zshield', tone: 'light' }
-};
-const titleCase = value => value.replace(/\b\w/g, char => char.toUpperCase());
-const clientLogoName = file => clientLogoCatalog[file]?.name || titleCase(file.replace(/\.[^.]+$/,'').replace(/\s*logo$/i,'').replace(/[-_]+/g,' ').replace(/([a-z])([A-Z])/g,'$1 $2').replace(/\s+/g,' ').trim());
-const clientLogoTone = file => clientLogoCatalog[file]?.tone === 'dark' ? 'dark' : 'light';
-const clientLogoPlate = (file,i) => `<li class="client-node" data-index="${num(i+1)}"><figure class="client-plate client-plate--${clientLogoTone(file)}"><span class="client-plate-index" aria-hidden="true">${num(i+1)}</span><span class="client-plate-logo"><img src="/assets/${displayLogoFiles.has(file)?'client-logo-display':'ClientLogos'}/${encodeURIComponent(file)}" alt="" decoding="async"></span><figcaption>${esc(clientLogoName(file))}</figcaption></figure></li>`;
-const clientShowcase = `<section class="client-showcase" aria-labelledby="client-showcase-title"><div class="client-showcase-inner wrap"><div class="client-showcase-copy"><p class="eyebrow">CLIENTS &amp; COLLABORATORS</p><h2 id="client-showcase-title">IN GOOD <em>COMPANY.</em></h2><p class="client-showcase-count"><strong>${clientLogoFiles.length}</strong><span>brands.<br>One standard.</span></p><div class="client-readout" aria-hidden="true"><span class="client-readout-label">NOW FACING</span><strong class="client-readout-name">${esc(clientLogoName(clientLogoFiles[0]))}</strong><span class="client-readout-index">01 / ${num(clientLogoFiles.length)}</span></div><div class="client-showcase-actions"><span class="client-hint" aria-hidden="true">Drag to spin. Click a logo to focus.</span><button class="client-pause" type="button" aria-pressed="false">Pause motion</button></div></div><div class="client-orbit"><canvas class="client-orbit-net" aria-hidden="true"></canvas><ul class="client-orbit-list" aria-label="Clients and collaborators">${clientLogoFiles.map(clientLogoPlate).join('')}</ul></div></div></section>`;
+// Client logos: every file in assets/ClientLogos becomes a trimmed, area-normalised
+// sticker (see scripts/client-logos.mjs). File names are the display names.
+const clientLogos = await buildClientLogos(root, out);
+const clientLogoPlate = (logo,i) => `<li class="client-node client-node--${logo.tone}" style="--w:${logo.width/2};--h:${logo.height/2};--pad:${logo.pad/2}"><figure class="client-sticker"><img src="${logo.src}" width="${Math.round(logo.width/2)}" height="${Math.round(logo.height/2)}" alt="" decoding="async" draggable="false"><figcaption class="client-name">${esc(logo.name)}</figcaption></figure><span class="client-index" aria-hidden="true">${num(i+1)}</span></li>`;
+const clientShowcase = `<section class="client-showcase" aria-labelledby="client-showcase-title"><div class="client-showcase-inner wrap"><div class="client-showcase-copy"><p class="eyebrow">CLIENTS &amp; COLLABORATORS</p><h2 id="client-showcase-title">IN GOOD <em>COMPANY.</em></h2><p class="client-showcase-count"><strong>${clientLogos.length}</strong><span>brands.<br>One standard.</span></p><div class="client-readout" aria-hidden="true"><span class="client-readout-label">NOW FACING</span><strong class="client-readout-name">${esc(clientLogos[0].name)}</strong><span class="client-readout-index">01 / ${num(clientLogos.length)}</span></div><div class="client-showcase-actions"><span class="client-hint" aria-hidden="true">Drag to spin. Click a logo to focus.</span><button class="client-pause" type="button" aria-pressed="false">Pause motion</button></div></div><div class="client-orbit"><canvas class="client-orbit-net" aria-hidden="true"></canvas><ul class="client-orbit-list" aria-label="Clients and collaborators">${clientLogos.map(clientLogoPlate).join('')}</ul></div></div></section>`;
 const button = (href,label,style='') => `<a class="button ${style}" href="${href}">${label}${arrow}</a>`;
 const eyebrow = s => `<p class="eyebrow">${s}</p>`;
 const tags = items => `<div class="tags">${items.map(t=>`<span>${esc(t)}</span>`).join('')}</div>`;
@@ -119,7 +87,7 @@ for(const [index,p] of projects.entries()) {
 }
 await page('/privacy/','Privacy','How Zencode handles information shared through this website.',`${pageHead('THE SMALL PRINT','YOUR DETAILS.<br><em>HERE’S THE DEAL.</em>','How we handle the information you share with Zencode.')}<article class="prose wrap section"><h2>When you contact us</h2><p>We receive the information you choose to share, including your name, email address, business name, message and any links. We use it to respond, discuss your project and manage the resulting conversation. Please avoid sending sensitive personal information or confidential records in your first enquiry.</p><h2>Services involved</h2><p>The form uses Web3Forms to deliver messages and hCaptcha for spam protection. These providers process form and technical information under their own policies. WhatsApp or email also process conversations sent through their services. Fonts load from Google Fonts. Our hosting provider may process technical request logs to deliver and protect the website.</p><h2>Website preferences</h2><p>The motion control stores your animation preference in your browser. Project filters may appear in the page URL so you can share your view. We do not use advertising trackers on this website.</p><h2>Your questions</h2><p>For questions about information you have shared, or to request access, correction or deletion, email <a href="mailto:info@zencode.my">info@zencode.my</a>. We keep enquiry details only as long as needed for the conversation and related business or record-keeping requirements.</p><h2>Third-party links</h2><p>Project sites and external services have their own privacy practices. See <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms’ privacy policy</a> and <a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">hCaptcha’s privacy policy</a>.</p></article>`);
 await page('/404.html','Page not found','This page could not be found. Let’s get you back on track.',`${pageHead('404 / WRONG TURN','NOT THIS WAY.<br><em>TRY ONE OF THESE.</em>','The page may have moved, or the link may be incomplete. Let’s get you back on track.')}<div class="error-actions wrap">${button('/','Back to home','coral')}${button('/work/','Explore the work','plain')}</div>`);
-await cp(path.join(root,'assets'),path.join(out,'assets'),{recursive:true});
+await cp(path.join(root,'assets'),path.join(out,'assets'),{recursive:true,filter:src=>!/[\\/]ClientLogos([\\/]|$)/.test(src)});
 for(const name of ['styles.css','product-previews.css','page-themes.css','motion.css','app.js','home-fx.js','CNAME'])await cp(path.join(root,name),path.join(out,name));
 await writeDiscovery(out,pages,projects,selectedWork,faqs);
 await writeFile(path.join(out,'.nojekyll'),'');

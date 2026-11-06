@@ -224,7 +224,8 @@
     const packets = Array.from({ length: 9 }, () => ({ edge: (Math.random() * edges.length) | 0, t: Math.random(), speed: 0.006 + Math.random() * 0.008, dir: Math.random() < 0.5 }));
 
     const AUTO = 0.0042;
-    let W = 0, H = 0, dpr = 1, R = 200, plateW = 146, plateH = 96;
+    let W = 0, H = 0, dpr = 1, R = 200;
+    let sizes = nodes.map(() => [140, 90]);
     let yaw = 0.4, pitch = -0.22, vYaw = AUTO, vPitch = 0;
     let drag = null, focusTarget = null, holdUntil = 0, hovered = -1, front = -1, hoverStage = false;
     const proj = pts.map(() => ({ x: 0, y: 0, z: 0, s: 1 }));
@@ -234,8 +235,10 @@
       W = rect.width; H = rect.height;
       dpr = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
-      plateW = nodes[0].offsetWidth || 146; plateH = nodes[0].offsetHeight || 96;
-      R = Math.max(110, Math.min(W, H) / 2 - plateW * 0.5);
+      // Stickers differ in size, so each one is centred on its own point.
+      sizes = nodes.map(n => [n.offsetWidth || 140, n.offsetHeight || 90]);
+      const avgW = sizes.reduce((sum, [w]) => sum + w, 0) / sizes.length;
+      R = Math.max(110, Math.min(W, H) / 2 - avgW * 0.38);
     }
 
     const rotate = ([x, y, z], cy, sy, cp, sp) => {
@@ -280,7 +283,7 @@
         const p = proj[i], depth = (p.z + 1) / 2;
         const scale = (0.42 + 0.48 * depth) * p.s * (i === hovered ? 1.12 : 1);
         const n = nodes[i].style;
-        n.transform = `translate3d(${(p.x - plateW / 2).toFixed(1)}px,${(p.y - plateH / 2).toFixed(1)}px,0) scale(${scale.toFixed(3)})`;
+        n.transform = `translate3d(${(p.x - sizes[i][0] / 2).toFixed(1)}px,${(p.y - sizes[i][1] / 2).toFixed(1)}px,0) scale(${scale.toFixed(3)})`;
         n.opacity = (0.18 + 0.82 * depth ** 1.4).toFixed(3);
         n.zIndex = String(Math.round(depth * 100) + (i === hovered ? 200 : 0));
       }
@@ -376,7 +379,7 @@
       section.classList.toggle('is-orbit', on);
       nodes.forEach(n => {
         if (on) n.tabIndex = 0;
-        else { n.removeAttribute('tabindex'); n.removeAttribute('style'); n.classList.remove('is-front', 'is-hover'); }
+        else { n.removeAttribute('tabindex'); n.style.removeProperty('transform'); n.style.removeProperty('opacity'); n.style.removeProperty('z-index'); n.classList.remove('is-front', 'is-hover'); }
       });
       front = -1;
       if (on) resize();
@@ -386,7 +389,7 @@
     controllers.push(controller);
     const sizeWatch = new ResizeObserver(() => { if (enabled) resize(); });
     sizeWatch.observe(stage);
-    sizeWatch.observe(nodes[0]);
+    nodes.forEach(n => sizeWatch.observe(n));
     controller.sync();
   }
 
