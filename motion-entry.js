@@ -62,6 +62,7 @@ function mount() {
   add('.section-head, .range-heading, .service-block-title, .industry-heading', 0, 38);
   add('.project-card, .range-project, .all-work-tile', 0.09, 38);
   add('.need-grid > a, .process > li, .feature-list > article', 0.065, 28);
+  add('.voice-grid > .voice, .team-portrait, .team-copy, .case-voice figure', 0.08, 30);
   add('.service-block-content > div, .industry-body > div, .case-overview > div', 0.075, 28);
   add('.studio-intro > div, .studio-rules article, .case-decisions article', 0.065, 28);
   // Native disclosures own their height animation; keep the control itself

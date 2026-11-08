@@ -1,0 +1,20 @@
+[
+  {
+    "src": "/assets/projects/screens/eissya/01.webp",
+    "width": 1600,
+    "height": 900,
+    "caption": "Home page: home-visit physiotherapy in Ipoh, with WhatsApp booking"
+  },
+  {
+    "src": "/assets/projects/screens/eissya/02.webp",
+    "width": 1600,
+    "height": 900,
+    "caption": "Packages: clear session pricing and what each pack includes"
+  },
+  {
+    "src": "/assets/projects/screens/eissya/03.webp",
+    "width": 1600,
+    "height": 900,
+    "caption": "Practice portal sign-in: patients, schedules, packages and progress notes live behind it"
+  }
+]

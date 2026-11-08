@@ -57,6 +57,7 @@ export const projectTitles = {
   musaed: 'Musaed — Local Bilingual Document AI',
   dinkframe: 'DINKFRAME — Creative Commerce & Customer Portal',
   phyziolab: 'Phyziolab — Physiotherapy Website',
+  eissya: 'Eissya Physio — Home Physiotherapy Website & Practice Portal',
   resthouse: 'The Resthouse — Hospitality & Heritage Website',
   ranya: 'Ranya Ibrahim Ahmed — Author & Commerce Website',
   pcms: 'PCMS — Marine Operations & Document Software',

@@ -6,7 +6,7 @@ export const capabilities = [
 ];
 
 export const industries = [
- ['Healthcare & wellbeing','Help people feel informed before they get in touch.','For practices and specialists, clear services, a credible introduction and an easy enquiry path matter. Phyziolab shows how we bring those pieces together.',['phyziolab']],
+ ['Healthcare & wellbeing','Help people feel informed before they get in touch.','For practices and specialists, clear services, a credible introduction and an easy enquiry path matter. Phyziolab and Eissya Physio show how we bring those pieces together, from the first visit online to the practice behind it.',['phyziolab','eissya']],
  ['Hospitality & heritage','Let the experience begin before the visit.','Places have a character of their own. We give their story, setting and details room to breathe, while keeping practical information easy to find.',['resthouse']],
  ['Sports, lifestyle & retail','Bring the brand and the buying journey together.','From custom creative orders to expressive product presentation, we think about both the customer-facing experience and what happens behind it.',['dinkframe','dry-skateboards']],
  ['Publishing & education','Make creative work easier to discover.','Authors and independent creators need room for their voice, their work and their services. We connect those stories with a practical way to browse and enquire.',['ranya']],

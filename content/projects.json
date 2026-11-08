@@ -67,6 +67,40 @@
     "note": "This project showcases the practice’s public website, not a medical records or clinical decision system."
   },
   {
+    "slug": "eissya",
+    "name": "Eissya Physio",
+    "industry": "Healthcare & wellbeing",
+    "category": "Platforms",
+    "type": "Website & practice portal",
+    "image": "eissya.webp",
+    "color": "#f2b8c6",
+    "headline": "A home physio practice, online and organised.",
+    "summary": "A website and private practice portal for a home-visit physiotherapist in Ipoh: clear packages and direct booking for clients, with patients, schedules and progress notes behind the scenes.",
+    "challenge": "A solo physiotherapist who travels to her patients needs two things: a clear, trustworthy first impression for new clients, and an easy way to keep appointments, packages and patient progress organised between visits.",
+    "approach": "We built a warm, calm public website that explains the service, the process and the packages, with WhatsApp booking at every step. Behind it, a private practice portal brings patients, schedules, package progress and session notes together in one place.",
+    "features": [
+      [
+        "Clear packages and booking",
+        "Transparent session pricing, the steps from first message to first visit, and WhatsApp booking throughout."
+      ],
+      [
+        "Patients and schedules in one place",
+        "Add and manage patients, check upcoming appointments and timings, and follow each patient’s package progress."
+      ],
+      [
+        "Notes between sessions",
+        "Session notes kept with each patient, so their condition and progress are ready before the next visit."
+      ]
+    ],
+    "services": [
+      "Website design",
+      "Practice portal",
+      "Booking & scheduling"
+    ],
+    "url": "https://eissya.site",
+    "note": "The practice portal at admin.eissya.site is private. Only its sign-in page is shown here; no patient information is published."
+  },
+  {
     "slug": "resthouse",
     "name": "The Resthouse",
     "industry": "Hospitality & heritage",
@@ -165,7 +199,7 @@
       "Document automation",
       "Desktop development"
     ],
-    "note": "The visual is a simplified interface illustration. No client records, vessel details or private operational data are shown."
+    "note": "Screenshots are from the working application, shown without client records, vessel details or private operational data."
   },
   {
     "slug": "qlynk",

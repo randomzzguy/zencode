@@ -27,16 +27,16 @@ async def main():
    print('Routes passed:',width,len(routes),flush=True)
   await page.set_viewport_size({'width':1440,'height':1000})
   await page.goto('http://localhost:4173/')
-  assert await page.locator('.work-slide').count()==6
+  assert await page.locator('.work-slide').count()==4
   assert   await page.locator('.rail-prev').is_disabled()
   await page.locator('.rail-next').scroll_into_view_if_needed()
   await page.wait_for_timeout(400)
   await page.locator('.rail-next').click()
-  await page.wait_for_function("document.querySelector('.rail-count').textContent==='02 / 06'")
+  await page.wait_for_function("document.querySelector('.rail-count').textContent==='02 / 04'")
   await page.wait_for_timeout(700)
-  for index in range(3,7):
+  for index in range(3,5):
    await page.locator('.rail-next').click()
-   await page.wait_for_function("document.querySelector('.rail-count').textContent==="+repr(f'{index:02d} / 06'))
+   await page.wait_for_function("document.querySelector('.rail-count').textContent==="+repr(f'{index:02d} / 04'))
    await page.wait_for_timeout(700)
   await page.wait_for_function("document.querySelector('.rail-next').disabled")
   await page.wait_for_timeout(700)
@@ -58,7 +58,7 @@ async def main():
   await page.locator('#project-search').fill('not-a-project')
   assert await page.locator('#empty-state').is_visible()
   await page.locator('#reset-filters').click()
-  assert await page.locator('.project-card:visible').count()==12
+  assert await page.locator('.project-card:visible').count()==13
   await page.locator('#project-search').fill('fleet')
   assert await page.locator('.project-card:visible').count()==2
   await page.locator('#project-search').fill('')

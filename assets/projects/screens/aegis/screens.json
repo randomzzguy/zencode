@@ -1,0 +1,14 @@
+[
+  {
+    "src": "/assets/projects/screens/aegis/01.webp",
+    "width": 1600,
+    "height": 787,
+    "caption": "Research status: current experiment and market universe"
+  },
+  {
+    "src": "/assets/projects/screens/aegis/02.webp",
+    "width": 1600,
+    "height": 791,
+    "caption": "Research pipeline, risk guardrails and strategy settings"
+  }
+]

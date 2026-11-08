@@ -130,3 +130,80 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 @media(max-width:850px){.client-showcase{padding:52px 0}.client-showcase.is-orbit .client-orbit{height:min(560px,112vw)}}
 @media(max-width:600px){.client-showcase{padding:42px 0}.client-showcase-copy{display:flex;align-items:flex-start}.client-showcase-copy h2{font-size:clamp(42px,12vw,58px)}.client-showcase-count{margin-top:22px}.client-showcase-count strong{font-size:56px}.client-orbit-list{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px 6px}.client-node{min-height:88px}.client-showcase{--logo-scale:.6}.client-pause{padding-inline:12px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.client-pause,.client-hint{display:none}}
+/* HOME: where to start, proof under each path */
+.need-grid>a>span:first-child{text-transform:uppercase;letter-spacing:.08em}
+.need-proof{display:block;margin-top:18px;font-size:12px;line-height:1.5;color:var(--muted)}
+/* HOME: client quote inside a work slide */
+.work-slide-quote{margin:0 0 24px;max-width:340px;border-left:2px solid var(--coral);padding-left:14px}
+.work-slide-quote p{font-size:14px;line-height:1.55;font-style:italic;color:var(--ink)}
+.work-slide-quote cite{display:block;margin-top:8px;font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--peach)}
+.work-more{margin-top:34px;display:flex;justify-content:flex-end}
+/* HOME: testimonials, cream paper */
+.voices-section{background:var(--ink);color:var(--bg)}
+.voices-section .section-head>p{color:#2d2627b3}
+.voices-section .section-head h2{font-size:clamp(58px,6.8vw,104px)}
+.voice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.voice{margin:0;padding:30px 32px 28px;background:#2d26270a;border-top:2px solid var(--bg);display:flex;flex-direction:column;min-width:0}
+.voice-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px;min-height:72px}
+.voice-logo{height:72px;width:auto;max-width:210px;object-fit:contain}
+.voice-mark{font:800 96px/.7 var(--display);color:var(--coral)}
+.voice blockquote{margin:0;flex:1}
+.voice blockquote p{font-size:19px;line-height:1.55;font-weight:400}
+.voice figcaption{margin-top:28px;display:grid;gap:4px;font-size:13px;line-height:1.45}
+.voice figcaption strong{font:700 23px/1 var(--display);text-transform:uppercase}
+.voice figcaption span{color:#2d2627a6}
+.voice figcaption a{margin-top:12px;width:fit-content;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#b83139;border-bottom:1px solid currentColor;padding-bottom:2px}
+/* HOME: who you'll work with */
+.team-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
+.team-portrait{aspect-ratio:4/5;background:var(--coral);overflow:hidden;position:relative}
+.team-portrait>img{width:100%;height:100%;object-fit:cover;display:block}
+.team-portrait-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:34px;color:var(--bg);background:radial-gradient(#2d262738 1px,transparent 1.4px) 0 0/18px 18px,var(--coral)}
+.team-portrait-placeholder img{width:110px;height:auto}
+.team-portrait-placeholder span{font:800 clamp(56px,6vw,92px)/.85 var(--display)}
+.team-portrait-placeholder small{display:block;margin-top:12px;font:600 12px var(--body);letter-spacing:.16em}
+.team-copy h2{font-size:clamp(52px,6vw,90px);margin-bottom:30px}
+.team-copy p:not(.eyebrow){max-width:580px;font-size:17px;line-height:1.6;color:var(--muted);margin-bottom:16px}
+.team-copy p.large-copy{font-size:23px;line-height:1.45;color:var(--ink)}
+.team-facts{list-style:none;padding:0;margin:28px 0 34px;display:grid;gap:12px}
+.team-facts li{display:flex;gap:14px;align-items:center;font-size:15px}
+.team-facts li::before{content:"";flex:0 0 8px;height:8px;border-radius:50%;background:var(--coral)}
+.team-actions{display:flex;flex-wrap:wrap;gap:12px}
+.how-section{border-top:1px solid var(--line)}
+/* CASE STUDY: client's words */
+.case-voice figure{margin:0;display:grid;grid-template-columns:90px 1fr;gap:0 30px;max-width:1050px}
+.case-voice .voice-mark{font-size:160px;grid-row:span 2}
+.case-voice blockquote{margin:0}
+.case-voice blockquote p{font-size:22px;line-height:1.55;margin-bottom:18px}
+.case-voice figcaption{display:flex;align-items:center;gap:20px;margin-top:14px;border-top:1px solid var(--line);padding-top:22px}
+.case-voice figcaption .voice-logo{height:56px}
+.case-voice figcaption strong{display:block;font:700 24px/1 var(--display);text-transform:uppercase;margin-bottom:5px}
+.case-voice figcaption span{font-size:14px;color:var(--muted)}
+@media(max-width:1000px){
+  .voice-grid{grid-template-columns:1fr}
+  .team-layout{grid-template-columns:1fr;gap:44px}
+  .team-portrait{max-width:520px;width:100%;aspect-ratio:4/3}
+}
+@media(max-width:600px){
+  .voice{padding:24px 22px}
+  .voice blockquote p{font-size:17px}
+  .voice-logo{height:52px;max-width:170px}
+  .voice-mark{font-size:76px}
+  .team-copy p.large-copy{font-size:20px}
+  .work-more{justify-content:flex-start}
+  .work-slide-quote{grid-column:1/-1;max-width:none}
+  .case-voice figure{grid-template-columns:1fr}
+  .case-voice .voice-mark{font-size:100px;grid-row:auto}
+  .case-voice blockquote p{font-size:18px}
+  .case-voice figcaption{flex-wrap:wrap}
+}
+/* Real app screenshots: cover crop and case study gallery */
+.project-visual.screen-visual{background:linear-gradient(160deg,#3d5459,#1d2629);padding:5% 5% 0}
+.screen-visual-pcms{background:linear-gradient(160deg,#3b4f78,#16233b)}
+.project-visual.screen-visual>img{object-fit:cover;object-position:top left;border-radius:8px 8px 0 0;box-shadow:0 22px 50px -18px #000b}
+.case-screens{background:#252122}
+.screen-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px 28px}
+.screen-grid figure{margin:0;min-width:0}
+.screen-grid figure:first-child{grid-column:1/-1}
+.screen-grid img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 18px 44px -20px #000c;background:#fff}
+.screen-grid figcaption{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+@media(max-width:850px){.screen-grid{grid-template-columns:1fr;gap:26px}}

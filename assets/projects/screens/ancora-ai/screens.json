@@ -1,0 +1,32 @@
+[
+  {
+    "src": "/assets/projects/screens/ancora-ai/01.webp",
+    "width": 1600,
+    "height": 790,
+    "caption": "Portfolio command center with the Ask Ancora assistant"
+  },
+  {
+    "src": "/assets/projects/screens/ancora-ai/02.webp",
+    "width": 1600,
+    "height": 790,
+    "caption": "Project controls: budgets, progress and delivery status"
+  },
+  {
+    "src": "/assets/projects/screens/ancora-ai/03.webp",
+    "width": 1600,
+    "height": 791,
+    "caption": "Fleet: vessel status, assignments and readiness"
+  },
+  {
+    "src": "/assets/projects/screens/ancora-ai/04.webp",
+    "width": 1600,
+    "height": 788,
+    "caption": "Finance & P&L: forecasts, margin and working capital"
+  },
+  {
+    "src": "/assets/projects/screens/ancora-ai/05.webp",
+    "width": 1600,
+    "height": 790,
+    "caption": "Secure, role-based sign-in"
+  }
+]

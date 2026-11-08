@@ -1,0 +1,26 @@
+[
+  {
+    "src": "/assets/projects/screens/taprepute/01.webp",
+    "width": 1600,
+    "height": 790,
+    "caption": "Owner overview: experience score, visits and newest feedback"
+  },
+  {
+    "src": "/assets/projects/screens/taprepute/02.webp",
+    "width": 1600,
+    "height": 790,
+    "caption": "The customer’s quick check-in"
+  },
+  {
+    "src": "/assets/projects/screens/taprepute/03.webp",
+    "width": 1600,
+    "height": 791,
+    "caption": "Share & QR: links, printable QR and follow-up messages"
+  },
+  {
+    "src": "/assets/projects/screens/taprepute/04.webp",
+    "width": 1600,
+    "height": 786,
+    "caption": "TapRepute landing page"
+  }
+]

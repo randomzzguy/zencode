@@ -1,0 +1,14 @@
+[
+  {
+    "src": "/assets/projects/screens/pcms/01.webp",
+    "width": 1600,
+    "height": 859,
+    "caption": "Dashboard: shortcuts, upcoming work and what needs attention"
+  },
+  {
+    "src": "/assets/projects/screens/pcms/02.webp",
+    "width": 1600,
+    "height": 857,
+    "caption": "Email intelligence: inbox triage and drafted replies for review"
+  }
+]
