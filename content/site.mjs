@@ -21,6 +21,10 @@ export const pageMetadata = {
     name: 'Home', title: 'Websites, Custom Software & AI in Malaysia',
     description: 'Zencode Software Labs builds websites, custom software, automation and AI tools for businesses across healthcare, hospitality, retail and industry.'
   },
+  '/ai-assistant/': {
+    name: 'AI assistant setup', title: 'AI Assistant Setup for Small Businesses in Malaysia',
+    description: 'Zencode sets up an AI assistant that answers your customers’ questions from your own information. Built on Qlynk. One setup fee from RM 900, no monthly charge from us.'
+  },
   '/work/': {
     name: 'Work', title: 'Our Work: Websites, Products & Industrial Software',
     description: 'Explore Zencode projects across industrial software, healthcare, hospitality, commerce, AI agents and independent digital products.'

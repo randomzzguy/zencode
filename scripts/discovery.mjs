@@ -62,6 +62,19 @@ function pageDocument(page,projects,selectedWork,faqs) {
   if(page.route==='/industries/') return preface+industries.map(([name,title,copy,slugs])=>`## ${name}\n\n${title}\n\n${copy}\n\nRelated work: ${slugs.map(slug=>projectLink(projects.find(project=>project.slug===slug))).join(', ')}.`).join('\n\n')+`\n\n## A new industry\n\nWe start by understanding the customers, processes and details that make a business different. Contact: ${url('/contact/')}\n`;
   if(page.route==='/studio/') return preface+`## ${site.legalName}\n\n${site.description}\n\nSSM: ${site.registration}\n\nZencode is led by Zeyad, a developer and product builder with a design background. Our work combines thoughtful interfaces, practical systems and personal ownership of the details.\n\nZeyad’s portfolio: ${site.portfolio}\n\n## How we work\n\n- Ask questions before recommending technology.\n- Explain options and trade-offs clearly.\n- Share working progress and use feedback to shape the result.\n- Take care of the interface, workflow and handover.\n\n${site.engagement}\n`;
   if(page.route==='/contact/') return preface+`## Start a conversation\n\nEmail: ${site.email}\nWhatsApp: ${site.whatsapp}\nEnquiry form: ${url('/contact/')}\n\nYou can ask about a stronger online presence, a better business workflow, practical AI, or a new product idea. A technical brief is not required.\n\n${site.engagement}\n\nBased in ${site.country}.\nLegal business name: ${site.legalName}\nSSM: ${site.registration}\n\nPrivacy notice: ${url('/privacy/')}\n`;
+  if(page.route==='/ai-assistant/') return preface+`## What it is
+
+Zencode sets up an AI assistant, built on Qlynk, that answers a business’s customer questions from its own approved information. It gets its own page and QR code at qlynk.site/yourbusiness and a chat button for the business website. Owners log in to read conversations and see questions it could not answer yet.
+
+## Price
+
+- Starter: RM 900 one-time setup, ready in 3 days.
+- Standard: RM 1,800 one-time setup, ready in 5 to 7 days, with answers written together and 30 days of tweaks.
+
+No monthly charge from Zencode. Qlynk’s Creator plan is free with 5,000 messages a month; its optional Agency plan is US$38 a month, paid to Qlynk.
+
+Start: ${site.whatsapp}
+`;
   if(page.route==='/privacy/') return preface+privacyMarkdown(page.body)+'\n';
   throw new Error(`Missing Markdown content for ${page.route}`);
 }
@@ -86,7 +99,7 @@ ${site.projectContext}
 
 ## Company and services
 
-${['/','/capabilities/','/industries/','/studio/','/contact/'].map(route=>`- ${mdLink(pageMetadata[route].name,route)}: ${pageMetadata[route].description}`).join('\n')}
+${['/','/capabilities/','/ai-assistant/','/industries/','/studio/','/contact/'].map(route=>`- ${mdLink(pageMetadata[route].name,route)}: ${pageMetadata[route].description}`).join('\n')}
 
 ## Projects
 
