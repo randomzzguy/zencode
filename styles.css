@@ -156,7 +156,7 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 /* HOME: who you'll work with */
 .team-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
 .team-portrait{aspect-ratio:4/5;background:var(--coral);overflow:hidden;position:relative}
-.team-portrait>img{width:100%;height:100%;object-fit:cover;display:block}
+.team-portrait>img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .team-portrait-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:34px;color:var(--bg);background:radial-gradient(#2d262738 1px,transparent 1.4px) 0 0/18px 18px,var(--coral)}
 .team-portrait-placeholder img{width:110px;height:auto}
 .team-portrait-placeholder span{font:800 clamp(56px,6vw,92px)/.85 var(--display)}
