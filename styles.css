@@ -154,13 +154,13 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .voice figcaption span{color:#2d2627a6}
 .voice figcaption a{margin-top:12px;width:fit-content;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#b83139;border-bottom:1px solid currentColor;padding-bottom:2px}
 /* HOME: who you'll work with */
-.team-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
-.team-portrait{aspect-ratio:4/5;background:var(--coral);overflow:hidden;position:relative}
-.team-portrait>img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
-.team-portrait-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:34px;color:var(--bg);background:radial-gradient(#2d262738 1px,transparent 1.4px) 0 0/18px 18px,var(--coral)}
-.team-portrait-placeholder img{width:110px;height:auto}
-.team-portrait-placeholder span{font:800 clamp(56px,6vw,92px)/.85 var(--display)}
-.team-portrait-placeholder small{display:block;margin-top:12px;font:600 12px var(--body);letter-spacing:.16em}
+.team-layout{display:grid;gap:56px}
+.team-portrait{aspect-ratio:1672/941;background:#1d1819;overflow:hidden;position:relative;border:1px solid var(--line)}
+.team-portrait>img{width:100%;height:100%;object-fit:cover;display:block}.team-copy{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
+
+
+
+
 .team-copy h2{font-size:clamp(52px,6vw,90px);margin-bottom:30px}
 .team-copy p:not(.eyebrow){max-width:580px;font-size:17px;line-height:1.6;color:var(--muted);margin-bottom:16px}
 .team-copy p.large-copy{font-size:23px;line-height:1.45;color:var(--ink)}
@@ -180,8 +180,8 @@ html{scroll-padding-top:calc(var(--header-height) + 24px)}
 .case-voice figcaption span{font-size:14px;color:var(--muted)}
 @media(max-width:1000px){
   .voice-grid{grid-template-columns:1fr}
-  .team-layout{grid-template-columns:1fr;gap:44px}
-  .team-portrait{max-width:520px;width:100%;aspect-ratio:4/3}
+  .team-layout{gap:40px}.team-copy{grid-template-columns:1fr;gap:10px}
+  
 }
 @media(max-width:600px){
   .voice{padding:24px 22px}
